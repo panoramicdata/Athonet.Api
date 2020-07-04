@@ -12,7 +12,7 @@
 		<RepositoryUrl>https://github.com/panoramicdata/Athonet.Api</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Athonet, API</PackageTags>
-		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
+		<PackageReleaseNotes>Initial alpha release</PackageReleaseNotes>
 		<PackageIcon>Icon.png</PackageIcon>
 	</PropertyGroup>
 	<ItemGroup>
