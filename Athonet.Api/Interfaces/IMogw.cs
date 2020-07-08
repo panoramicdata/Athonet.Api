@@ -13,16 +13,17 @@ namespace Athonet.Api.Interfaces
 		/// <param name="cancellationToken">The CancellationToken</param>
 		[Get("/API/mogw/events")]
 		Task<MogwEventSet> GetEventsAsync(
-			[Query] string? imsi = null,
-			[Query] string? imei = null,
-			[Query] long? from = null,
-			[Query] long? to = null,
-			[Query] string? type = null,
-			[Query] string? layer = null,
-			[Query] string? id = null,
-			[Query] string? id__gt = null,
-			[Query] string? id__gte = null,
-			[Query] string? orderBy = null,
+			[AliasAs("imsi")] string? imsi = null,
+			[AliasAs("imei")] string? imei = null,
+			[AliasAs("from")] long? from = null,
+			[AliasAs("to")] long? to = null,
+			[AliasAs("limit")] int? limit = null,
+			[AliasAs("type")] string? type = null,
+			[AliasAs("layer")] string? layer = null,
+			[AliasAs("id")] string? id = null,
+			[AliasAs("id__gt")] string? idGt = null,
+			[AliasAs("id__gte")] string? idGte = null,
+			[AliasAs("order_by")] string? orderBy = null,
 			CancellationToken cancellationToken = default);
 	}
 }
