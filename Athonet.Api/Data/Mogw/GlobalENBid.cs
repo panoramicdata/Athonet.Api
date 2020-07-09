@@ -3,12 +3,12 @@
 namespace Athonet.Api.Data.Mogw
 {
 	[DataContract]
-	public class GlobalENBid
+	public class GlobalENodeBId
 	{
-		[DataMember(Name = "homeENBid")]
-		public int HomeENBid { get; set; }
-
 		[DataMember(Name = "plmn")]
-		public string? Plmn { get; set; } = null!;
+		public string Plmn { get; set; } = string.Empty;
+
+		[DataMember(Name = "homeENBid")]
+		public int HomeENodeBId { get; set; }
 	}
 }

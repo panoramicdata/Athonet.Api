@@ -16,6 +16,6 @@ namespace Athonet.Api.Data.Mogw
 		public int Total { get; set; }
 
 		[DataMember(Name = "events")]
-		public IList<Event> Events { get; set; } = null!;
+		public IList<Event> Events { get; set; } = new List<Event>();
 	}
 }

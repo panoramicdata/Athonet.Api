@@ -9,21 +9,21 @@ namespace Athonet.Api.Data.Mogw
 		public EventLayer Layer { get; set; }
 
 		[DataMember(Name = "event_type")]
-		public EventType EventType { get; set; }
+		public EventType Type { get; set; }
 
 		[DataMember(Name = "timestamp")]
-		public int Timestamp { get; set; }
-
-		[DataMember(Name = "event")]
-		public string? EventMessage { get; set; }
-
-		[DataMember(Name = "evt")]
-		public Evt Evt { get; set; } = null!;
-
-		[DataMember(Name = "proc")]
-		public string Proc { get; set; } = null!;
+		public int UnixTimestamp { get; set; }
 
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
+
+		[DataMember(Name = "evt")]
+		public EventDetails EventDetails { get; set; } = new EventDetails();
+
+		[DataMember(Name = "proc")]
+		public string Process { get; set; } = string.Empty;
+
+		[DataMember(Name = "event")]
+		public string? EventMessage { get; set; }
 	}
 }
