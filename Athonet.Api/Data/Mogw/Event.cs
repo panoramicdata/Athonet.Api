@@ -6,10 +6,10 @@ namespace Athonet.Api.Data.Mogw
 	public class Event
 	{
 		[DataMember(Name = "layer")]
-		public string Layer { get; set; } = null!;
+		public EventLayer Layer { get; set; }
 
 		[DataMember(Name = "event_type")]
-		public string EventType { get; set; } = null!;
+		public EventType EventType { get; set; }
 
 		[DataMember(Name = "timestamp")]
 		public int Timestamp { get; set; }
