@@ -16,7 +16,7 @@ namespace Athonet.Api.Data.Mogw
 		public string Type { get; set; } = null!;
 
 		[DataMember(Name = "ip")]
-		public object Ip { get; set; } = null!;
+		public string Ip { get; set; } = null!;
 
 		[DataMember(Name = "timestamp")]
 		public int Timestamp { get; set; }
@@ -25,7 +25,7 @@ namespace Athonet.Api.Data.Mogw
 		public GlobalENBid GlobalENBid { get; set; } = null!;
 
 		[DataMember(Name = "timestampex")]
-		public object Timestampex { get; set; } = null!;
+		public long TimestampEx { get; set; }
 
 		[DataMember(Name = "ENBname")]
 		public string ENBname { get; set; } = null!;

@@ -351,6 +351,9 @@ MigrationBackup/
 
 # Config
 appsettings.json
+appsettings.*.json
+!appsettings.example.json
+
 
 # Certificates
 *.crt
