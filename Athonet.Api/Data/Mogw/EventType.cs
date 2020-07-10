@@ -7,94 +7,102 @@ namespace Athonet.Api.Data.Mogw
 	{
 		Unknown,
 
-		[DataMember(Name = "attach")]
+		[EnumMember(Value = "attach")]
 		Attach,
 
-		[DataMember(Name = "attach_failure")]
+		[EnumMember(Value = "attach_failure")]
 		AttachFailure,
 
-		[DataMember(Name = "access_accept")]
+		[EnumMember(Value = "access_accept")]
 		AccessAccept,
 
-		[DataMember(Name = "access_reject")]
+		[EnumMember(Value = "access_reject")]
 		AccessReject,
 
-		[DataMember(Name = "detach")]
+		[EnumMember(Value = "detach")]
 		Detach,
 
-		[DataMember(Name = "location_update")]
+		[EnumMember(Value = "location_update")]
 		LocationUpdate,
 
-		[DataMember(Name = "def_bearer_activation")]
+		[EnumMember(Value = "def_bearer_activation")]
 		DefBearerActivation,
 
-		[DataMember(Name = "def_bearer_activation_failure")]
+		[EnumMember(Value = "def_bearer_activation_failure")]
 		DefBearerActivationFailure,
 
-		[DataMember(Name = "def_bearer_deactivation")]
+		[EnumMember(Value = "def_bearer_deactivation")]
 		DefBearerDeactivation,
 
-		[DataMember(Name = "bearer_deactivation")]
+		[EnumMember(Value = "bearer_deactivation")]
 		BearerDeactivation,
 
-		[DataMember(Name = "create_session")]
+		[EnumMember(Value = "create_session")]
 		CreateSession,
 
-		[DataMember(Name = "delete_session")]
+		[EnumMember(Value = "delete_session")]
 		DeleteSession,
 
-		[DataMember(Name = "modify_session")]
+		[EnumMember(Value = "modify_session")]
 		ModifySession,
 
-		[DataMember(Name = "update_session")]
+		[EnumMember(Value = "update_session")]
 		UpdateSession,
 
-		[DataMember(Name = "ded_bearer_activation")]
+		[EnumMember(Value = "ded_bearer_activation")]
 		DedBearerActivation,
 
-		[DataMember(Name = "ded_bearer_activation_failure")]
+		[EnumMember(Value = "ded_bearer_activation_failure")]
 		DedBearerActivationFailure,
 
-		[DataMember(Name = "s1_setup")]
+		[EnumMember(Value = "s1_setup")]
 		S1Setup,
 
-		[DataMember(Name = "s1_down")]
+		[EnumMember(Value = "s1_down")]
 		S1Down,
 
-		[DataMember(Name = "s1_setup_fail")]
+		[EnumMember(Value = "s1_setup_fail")]
 		S1SetupFail,
 
-		[DataMember(Name = "s1_reset")]
+		[EnumMember(Value = "s1_reset")]
 		S1Reset,
 
-		[DataMember(Name = "unreachable")]
+		[EnumMember(Value = "unreachable")]
 		Unreachable,
 
-		[DataMember(Name = "reachable")]
+		[EnumMember(Value = "reachable")]
 		Reachable,
 
-		[DataMember(Name = "routing_area_update")]
+		[EnumMember(Value = "routing_area_update")]
 		RoutingAreaUpdate,
 
-		[DataMember(Name = "tracking_area_update")]
+		[EnumMember(Value = "tracking_area_update")]
 		TrackingAreaUpdate,
 
-		[DataMember(Name = "isd")]
+		[EnumMember(Value = "isd")]
 		Isd,
 
-		[DataMember(Name = "isd_fail")]
+		[EnumMember(Value = "isd_fail")]
 		IsdFail,
 
-		[DataMember(Name = "clr")]
+		[EnumMember(Value = "clr")]
 		Clr,
 
-		[DataMember(Name = "clr_fail")]
+		[EnumMember(Value = "clr_fail")]
 		ClrFail,
 
-		[DataMember(Name = "update_location_fail")]
+		[EnumMember(Value = "update_location_fail")]
 		UpdateLocationFail,
 
-		[DataMember(Name = "cdr_limit")]
-		CdrLimit
+		[EnumMember(Value = "cdr_limit")]
+		CdrLimit,
+
+		// Outside documented values
+
+		[EnumMember(Value = "update_location")]
+		UpdateLocation,
+
+		[EnumMember(Value = "purge")]
+		Purge,
 	}
 }

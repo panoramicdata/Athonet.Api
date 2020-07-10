@@ -24,9 +24,14 @@ namespace Athonet.Api
 		public X509Certificate2? Certificate { get; set; }
 
 		/// <summary>
-		/// The HSS/PCRF HA hostname
+		/// Hostname
 		/// </summary>
-		public string? HssPcrfHaHostname { get; set; }
+		public string? Hostname { get; set; }
+
+		/// <summary>
+		/// Port - defaults to 446
+		/// </summary>
+		public int Port { get; set; } = 446;
 
 		/// <summary>
 		/// Whether to ignore SSL certificate errors

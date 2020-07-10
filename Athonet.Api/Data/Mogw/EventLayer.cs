@@ -7,13 +7,13 @@ namespace Athonet.Api.Data.Mogw
 	{
 		Unknown,
 
-		[DataMember(Name = "locations")]
+		[EnumMember(Value = "locations")]
 		LocationServices,
 
-		[DataMember(Name = "s1ap")]
+		[EnumMember(Value = "s1ap")]
 		S1APLayer,
 
-		[DataMember(Name = "nas")]
+		[EnumMember(Value = "nas")]
 		NetworkAcessStratumLayer
 	}
 }

@@ -1,6 +1,8 @@
 ﻿using Athonet.Api.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Refit;
 using System;
 using System.Net.Http;
@@ -32,14 +34,27 @@ namespace Athonet.Api
 
 			_httpClient = new HttpClient(authenticatedHttpHandler)
 			{
-				BaseAddress = new Uri($"https://{options.HssPcrfHaHostname}:446"),
+				BaseAddress = new Uri($"https://{options.Hostname}:{options.Port}"),
 			};
 			_httpClient.DefaultRequestHeaders.Add("X-MOGWAPI-AUTH", $"{options.Username}:{options.Password}");
 			_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
 			_logger.LogTrace("Constructor complete");
 
-			Hss = RestService.For<IHss>(_httpClient);
-			Mogw = RestService.For<IMogw>(_httpClient);
+			JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+			{
+				Converters = { new StringEnumConverter() }
+			};
+
+			var refitSettings = new RefitSettings
+			{
+				UrlParameterFormatter = new CustomUrlParameterFormatter(),
+				ContentSerializer = new NewtonsoftJsonContentSerializer(
+					new JsonSerializerSettings { Converters = { new StringEnumConverter() } }
+				)
+			};
+
+			Hss = RestService.For<IHss>(_httpClient, refitSettings);
+			Mogw = RestService.For<IMogw>(_httpClient, refitSettings);
 		}
 
 		public IHss Hss { get; }
