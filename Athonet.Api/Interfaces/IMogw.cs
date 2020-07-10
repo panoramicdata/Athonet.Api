@@ -20,9 +20,9 @@ namespace Athonet.Api.Interfaces
 			[AliasAs("limit")] int? limit = null,
 			[AliasAs("type")] EventType? type = null,
 			[AliasAs("layer")] EventLayer? layer = null,
-			[AliasAs("id")] string? id = null,
-			[AliasAs("id__gt")] string? idGt = null,
-			[AliasAs("id__gte")] string? idGte = null,
+			[AliasAs("id")] long? id = null,
+			[AliasAs("id__gt")] long? idGt = null,
+			[AliasAs("id__gte")] long? idGte = null,
 			[AliasAs("order_by")] string? orderBy = null,
 			CancellationToken cancellationToken = default);
 	}
