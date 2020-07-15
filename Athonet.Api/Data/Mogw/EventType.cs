@@ -106,6 +106,9 @@ namespace Athonet.Api.Data.Mogw
 		Purge,
 
 		[EnumMember(Value = "auth")]
-		Auth
+		Auth,
+
+		[EnumMember(Value = "create_session_reject")]
+		CreateSessionReject
 	}
 }
