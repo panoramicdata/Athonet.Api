@@ -14,6 +14,15 @@ namespace Athonet.Api.Data.Mogw
 		S1APLayer,
 
 		[EnumMember(Value = "nas")]
-		NetworkAcessStratumLayer
+		NetworkAcessStratumLayer,
+
+		// ** Undocumented entries ** //
+
+		[EnumMember(Value = "radius")]
+		Radius,
+
+		[EnumMember(Value = "gtp")]
+		GTP
+
 	}
 }

@@ -97,12 +97,15 @@ namespace Athonet.Api.Data.Mogw
 		[EnumMember(Value = "cdr_limit")]
 		CdrLimit,
 
-		// Outside documented values
+		// ** Undocumented entries ** //
 
 		[EnumMember(Value = "update_location")]
 		UpdateLocation,
 
 		[EnumMember(Value = "purge")]
 		Purge,
+
+		[EnumMember(Value = "auth")]
+		Auth
 	}
 }
