@@ -16,7 +16,7 @@ namespace Athonet.Api.Data.Mogw
 		public EventType Type { get; set; }
 
 		[DataMember(Name = "ip")]
-		public string? Ip { get; set; }
+		public object? Ip { get; set; }
 
 		[DataMember(Name = "timestamp")]
 		public int UnixTimestamp { get; set; }
