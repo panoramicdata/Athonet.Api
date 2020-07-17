@@ -16,8 +16,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<PackageReleaseNotes>
-			Event IP is now an object and it's sometimes a list of string and sometimes a string.
-			Added missing EventLayer and EventType entries.
+			Set static values for enums
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
