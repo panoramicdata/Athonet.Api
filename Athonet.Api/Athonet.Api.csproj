@@ -16,7 +16,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<PackageReleaseNotes>
-			Set static values for enums
+			Added further EventDetails fields
 		</PackageReleaseNotes>
 
 	</PropertyGroup>

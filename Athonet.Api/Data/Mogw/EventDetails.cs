@@ -50,5 +50,32 @@ namespace Athonet.Api.Data.Mogw
 
 		[DataMember(Name = "tai")]
 		public Tai? Tai { get; set; }
+
+		[DataMember(Name = "imei")]
+		public string? Imei { get; set; }
+
+		[DataMember(Name = "msisdn")]
+		public string? Msisdn { get; set; }
+
+		[DataMember(Name = "user_addr")]
+		public IList<string>? UserAddr { get; set; }
+
+		[DataMember(Name = "rat")]
+		public string? Rat { get; set; }
+
+		[DataMember(Name = "srv")]
+		public string? Srv { get; set; }
+
+		[DataMember(Name = "username")]
+		public string? Username { get; set; }
+
+		[DataMember(Name = "mme_hostname")]
+		public string? MmeHostname { get; set; }
+
+		[DataMember(Name = "mme_realmname")]
+		public string? MmeRealMName { get; set; }
+
+		[DataMember(Name = "interface")]
+		public string? Interface { get; set; }
 	}
 }
