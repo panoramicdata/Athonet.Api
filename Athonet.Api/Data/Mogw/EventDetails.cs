@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Athonet.Api.Data.Mogw
 {
@@ -48,9 +52,6 @@ namespace Athonet.Api.Data.Mogw
 		[DataMember(Name = "ecgi")]
 		public Ecgi? Ecgi { get; set; }
 
-		[DataMember(Name = "tai")]
-		public Tai? Tai { get; set; }
-
 		[DataMember(Name = "imei")]
 		public string? Imei { get; set; }
 
@@ -77,5 +78,38 @@ namespace Athonet.Api.Data.Mogw
 
 		[DataMember(Name = "interface")]
 		public string? Interface { get; set; }
+
+		[DataMember(Name = "tai")]
+		public object? TaiRaw { get; set; } = null!;
+
+		public Tai? Tai
+			=> TaiRaw switch
+			{
+				null => null,
+				Tai tai => tai,
+				JObject jObject => jObject.ToObject<Tai>(),
+				string taiString => GetTaiFromString(taiString),
+				_ => throw new JsonReaderException($"Could not determine Tai format from '{TaiRaw}")
+			};
+
+		/// <summary>
+		/// Example string to match against:
+		/// tac-lb83.tac-hb00.tac.epc.mnc340.mcc311.3gppnetwork.org
+		/// </summary>
+		private static readonly Regex TaiRegex = new Regex(@"^tac-lb(?<lowByte>[\d]{2})\.tac-hb(?<highByte>[\d]{2})\.tac\.epc\.mnc(?<mnc>[\d]+)\.mcc(?<mcc>[\d]+)\.3gppnetwork\.org$");
+
+		private static Tai GetTaiFromString(string taiRaw)
+		{
+			var matches = TaiRegex.Match(taiRaw);
+			if (!matches.Success)
+			{
+				throw new FormatException($"Could not determine Tai format from '{taiRaw}");
+			}
+			return new Tai
+			{
+				Plmn = $"{matches.Groups["mcc"]}{matches.Groups["mnc"]}",
+				Tac = Convert.ToInt32($"0x{matches.Groups["highByte"]}{matches.Groups["lowByte"]}", 16)
+			};
+		}
 	}
 }
