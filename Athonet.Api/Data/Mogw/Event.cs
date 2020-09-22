@@ -6,24 +6,24 @@ namespace Athonet.Api.Data.Mogw
 	public class Event
 	{
 		[DataMember(Name = "layer")]
-		public string Layer { get; set; } = null!;
+		public EventLayer Layer { get; set; }
 
 		[DataMember(Name = "event_type")]
-		public string EventType { get; set; } = null!;
+		public EventType Type { get; set; }
 
 		[DataMember(Name = "timestamp")]
-		public int Timestamp { get; set; }
-
-		[DataMember(Name = "event")]
-		public string EventMessage { get; set; } = null!;
-
-		[DataMember(Name = "evt")]
-		public Evt Evt { get; set; } = null!;
-
-		[DataMember(Name = "proc")]
-		public string Proc { get; set; } = null!;
+		public int UnixTimestamp { get; set; }
 
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
+
+		[DataMember(Name = "evt")]
+		public EventDetails EventDetails { get; set; } = new EventDetails();
+
+		[DataMember(Name = "proc")]
+		public string Process { get; set; } = string.Empty;
+
+		[DataMember(Name = "event")]
+		public string? EventMessage { get; set; }
 	}
 }

@@ -2,8 +2,7 @@
 using Divergic.Logging.Xunit;
 using Newtonsoft.Json;
 using System.IO;
-using System.Net;
-using System.Net.Security;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Xunit.Abstractions;
 
@@ -18,13 +17,15 @@ namespace Athonet.Api.Test
 
 			// Load config
 			var config = JsonConvert.DeserializeObject<TestConfiguration>(File.ReadAllText("../../../appsettings.json"));
+			var credentials = config.Credentials.Single(c => c.CredentialId == config.ActiveCredentialId);
 
 			var options = new AthonetClientOptions
 			{
-				Username = config.Username,
-				Password = config.Password,
-				Certificate = new X509Certificate2(config.CertificateFile, config.CertificatePassword),
-				HssPcrfHaHostname = config.HssPcrfHaHostname,
+				Username = credentials.Username,
+				Password = credentials.Password,
+				Certificate = new X509Certificate2(credentials.CertificateFile, credentials.CertificatePassword),
+				Hostname = credentials.Hostname,
+				Port = credentials.Port,
 				IgnoreSslCertificateErrors = true
 			};
 			options.Validate();
