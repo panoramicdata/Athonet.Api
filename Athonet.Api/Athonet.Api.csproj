@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Nullable>enable</Nullable>
@@ -16,17 +16,25 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<PackageReleaseNotes>
-			Added further EventDetails fields
+			Added option to record/retrieve the last HttpRequest and HttpsResponse.  False by default.
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.5" />
-	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.1.91">
+	  <PackageReference Include="IDisposableAnalyzers" Version="3.4.2">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="refit" Version="5.1.67" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.9" />
+	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="refit" Version="5.2.1" />
+	  <PackageReference Include="Roslynator.Analyzers" Version="3.0.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Icon.png" Pack="true" PackagePath="" />

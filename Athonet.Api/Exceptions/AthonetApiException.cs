@@ -5,7 +5,11 @@ namespace Athonet.Api.Exceptions
 {
 	public class AthonetApiException : Exception
 	{
-		public ErrorResponse ErrorResponse { get; }
+		public ErrorResponse? ErrorResponse { get; }
+
+		internal AthonetApiException()
+		{
+		}
 
 		internal AthonetApiException(ErrorResponse errorResponse) : base(errorResponse.Message)
 		{

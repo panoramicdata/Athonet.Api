@@ -39,6 +39,16 @@ namespace Athonet.Api
 		public bool IgnoreSslCertificateErrors { get; set; }
 
 		/// <summary>
+		/// Whether to include the raw HTTP response in AthonetApiExceptions
+		/// </summary>
+		public bool StoreLastRequestAndResponse { get; set; }
+
+		/// <summary>
+		/// The User-Agent to send in HTTP request headers.
+		/// </summary>
+		public string UserAgent { get; set; } = "Athonet.Api nuget package";
+
+		/// <summary>
 		/// Validate the options
 		/// </summary>
 		public void Validate()

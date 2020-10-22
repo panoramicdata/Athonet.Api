@@ -26,7 +26,9 @@ namespace Athonet.Api.Test
 				Certificate = new X509Certificate2(credentials.CertificateFile, credentials.CertificatePassword),
 				Hostname = credentials.Hostname,
 				Port = credentials.Port,
-				IgnoreSslCertificateErrors = true
+				IgnoreSslCertificateErrors = true,
+				UserAgent = "Athonet.Api Unit Test",
+				StoreLastRequestAndResponse = true
 			};
 			options.Validate();
 

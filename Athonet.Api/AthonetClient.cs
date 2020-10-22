@@ -14,6 +14,7 @@ namespace Athonet.Api
 		private bool disposedValue;
 		private readonly HttpClient _httpClient;
 		private readonly ILogger? _logger;
+		private readonly AuthenticatedHttpHandler _authenticatedHttpHandler;
 
 		public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
 		{
@@ -26,18 +27,20 @@ namespace Athonet.Api
 
 			_logger = logger ?? new NullLogger<AthonetClient>();
 
-			var authenticatedHttpHandler = new AuthenticatedHttpHandler(
-				options.IgnoreSslCertificateErrors,
+			_authenticatedHttpHandler = new AuthenticatedHttpHandler(
+				options,
 				_logger);
-			authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
-			authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
+			_authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
+			_authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
-			_httpClient = new HttpClient(authenticatedHttpHandler)
+			_httpClient = new HttpClient(_authenticatedHttpHandler)
 			{
 				BaseAddress = new Uri($"https://{options.Hostname}:{options.Port}"),
 			};
+
 			_httpClient.DefaultRequestHeaders.Add("X-MOGWAPI-AUTH", $"{options.Username}:{options.Password}");
 			_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+			_httpClient.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
 			_logger.LogTrace("Constructor complete");
 
 			JsonConvert.DefaultSettings = () => new JsonSerializerSettings
@@ -57,6 +60,18 @@ namespace Athonet.Api
 			Mogw = RestService.For<IMogw>(_httpClient, refitSettings);
 		}
 
+		/// <summary>
+		/// The last HTTP request if AthonetClientOptions.StoreLastRequestAndResponse is true.
+		/// </summary>
+		public string? LastHttpRequest
+			=> _authenticatedHttpHandler.LastHttpRequest;
+
+		/// <summary>
+		/// The last HTTP response if AthonetClientOptions.StoreLastRequestAndResponse is true.
+		/// </summary>
+		public string? LastHttpResponse
+			=> _authenticatedHttpHandler.LastHttpResponse;
+
 		public IHss Hss { get; }
 
 		public IMogw Mogw { get; }
@@ -68,6 +83,7 @@ namespace Athonet.Api
 				if (disposing)
 				{
 					_httpClient?.Dispose();
+					_authenticatedHttpHandler?.Dispose();
 				}
 
 				disposedValue = true;

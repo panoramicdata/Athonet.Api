@@ -14,11 +14,17 @@ namespace Athonet.Api
 	internal class AuthenticatedHttpHandler : HttpClientHandler
 	{
 		private readonly ILogger _logger;
+		private readonly AthonetClientOptions _options;
 
-		public AuthenticatedHttpHandler(bool ignoreSslCertificateErrors, ILogger logger)
+		public string? LastHttpRequest { get; private set; }
+
+		public string? LastHttpResponse { get; private set; }
+
+		public AuthenticatedHttpHandler(AthonetClientOptions options, ILogger logger)
 		{
 			_logger = logger;
-			if (ignoreSslCertificateErrors)
+			_options = options;
+			if (options.IgnoreSslCertificateErrors)
 			{
 				ServerCertificateCustomValidationCallback = DangerousAcceptAnyServerCertificateValidator;
 			}
@@ -36,6 +42,15 @@ namespace Athonet.Api
 			var guid = Guid.NewGuid();
 			try
 			{
+				if (_options.StoreLastRequestAndResponse)
+				{
+					LastHttpRequest = request.ToString();
+					if (request.Content != null)
+					{
+						LastHttpRequest += $"\n{await request.Content.ReadAsStringAsync().ConfigureAwait(false)}";
+					}
+				}
+
 				_logger.LogTrace($"{guid}: Request starting");
 
 				_logger.LogDebug($"{guid}: Request\n{request}");
@@ -46,6 +61,15 @@ namespace Athonet.Api
 
 				_logger.LogDebug($"{guid}: Response ({response.StatusCode})\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
 
+				if (_options.StoreLastRequestAndResponse)
+				{
+					LastHttpResponse = response.ToString();
+					if (response.Content != null)
+					{
+						LastHttpResponse += $"\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}";
+					}
+				}
+
 				if (response.IsSuccessStatusCode)
 				{
 					return response;
@@ -53,14 +77,18 @@ namespace Athonet.Api
 				// Failure
 
 				_logger.LogDebug($"{guid}: Failure code ({response.StatusCode})");
-				var responseBody = await response
+				var responseBody = response
+					.Content is null
+						? null
+						: await response
 					.Content
 					.ReadAsStringAsync()
 					.ConfigureAwait(false);
-				var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseBody);
-				throw new AthonetApiException(errorResponse);
+
+				throw responseBody is null ? new AthonetApiException()
+					: new AthonetApiException(JsonConvert.DeserializeObject<ErrorResponse>(responseBody));
 			}
-			catch(AthonetApiException)
+			catch (AthonetApiException)
 			{
 				throw;
 			}
