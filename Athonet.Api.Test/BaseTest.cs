@@ -27,7 +27,7 @@ namespace Athonet.Api.Test
 				Hostname = credentials.Hostname,
 				Port = credentials.Port,
 				IgnoreSslCertificateErrors = true,
-				UserAgent = "Athonet.Api Unit Test",
+				UserAgent = "Athonet.Api-Unit-Test",
 				StoreLastRequestAndResponse = true
 			};
 			options.Validate();

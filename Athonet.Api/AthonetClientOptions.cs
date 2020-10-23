@@ -46,7 +46,7 @@ namespace Athonet.Api
 		/// <summary>
 		/// The User-Agent to send in HTTP request headers.
 		/// </summary>
-		public string UserAgent { get; set; } = "Athonet.Api nuget package";
+		public string UserAgent { get; set; } = "Athonet.Api-nuget-package";
 
 		/// <summary>
 		/// Validate the options

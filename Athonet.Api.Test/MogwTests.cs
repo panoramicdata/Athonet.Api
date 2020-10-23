@@ -18,7 +18,7 @@ namespace Athonet.Api.Test
 			// Get all
 			var events = await Client
 				.Mogw
-				.GetEventsAsync(orderBy: "id")
+				.GetEventsAsync(orderBy: "id", limit: 10)
 				.ConfigureAwait(false);
 
 			events.Should().BeOfType<MogwEventSet>();
