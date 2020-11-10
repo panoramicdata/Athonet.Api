@@ -16,7 +16,8 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<PackageReleaseNotes>
-			Added option to record/retrieve the last HttpRequest and HttpsResponse.  False by default.
+			Improved error handling when EPC standby nodes are returning 502.
+			AthonetApiException now always contains the response body, if present and the HTTP status code.
 		</PackageReleaseNotes>
 
 	</PropertyGroup>

@@ -18,6 +18,6 @@ namespace Athonet.Api.Data
 		/// The error message
 		/// </summary>
 		[DataMember(Name = "message")]
-		public string Message { get; set; } = null!;
+		public string Message { get; set; } = string.Empty;
 	}
 }

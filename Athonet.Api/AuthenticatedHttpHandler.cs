@@ -77,16 +77,40 @@ namespace Athonet.Api
 				// Failure
 
 				_logger.LogDebug($"{guid}: Failure code ({response.StatusCode})");
+
 				var responseBody = response
 					.Content is null
 						? null
 						: await response
-					.Content
-					.ReadAsStringAsync()
-					.ConfigureAwait(false);
+							.Content
+							.ReadAsStringAsync()
+							.ConfigureAwait(false);
 
-				throw responseBody is null ? new AthonetApiException()
-					: new AthonetApiException(JsonConvert.DeserializeObject<ErrorResponse>(responseBody));
+				// Do we have a body?
+				if (responseBody != null)
+				{
+					// Yes.  Try to deserialize an error response.
+					try
+					{
+						var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(
+							responseBody,
+							new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
+						);
+						if (errorResponse != null)
+						{
+							throw new AthonetApiException(response.StatusCode, errorResponse, responseBody);
+						}
+					}
+					catch (Exception exception)
+					{
+						// This will happen if:
+						// - the content is XML (JsonReaderException)
+						// - the content is Json, but not a valid ErrorResponse (JsonSerializationException)
+						throw new AthonetApiException(response.StatusCode, exception.Message, responseBody);
+					}
+				}
+
+				throw new AthonetApiException(response.StatusCode, response.StatusCode.ToString(), responseBody ?? string.Empty);
 			}
 			catch (AthonetApiException)
 			{
