@@ -360,3 +360,4 @@ appsettings.*.json
 *.cer
 *.p12
 *.der
+/Athonet.Api/nuget-api-key.txt
