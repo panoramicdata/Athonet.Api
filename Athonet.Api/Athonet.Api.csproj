@@ -13,13 +13,16 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Athonet, API</PackageTags>
 		<PackageIcon>Icon.png</PackageIcon>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Product>Athonet.Api</Product>
+		<PackageId>Athonet.Api</PackageId>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<Company>Panoramic Data Limited</Company>
 
 		<PackageReleaseNotes>
 			Improved error handling when EPC standby nodes are returning 502.
 			AthonetApiException now always contains the response body, if present and the HTTP status code.
 		</PackageReleaseNotes>
-
 	</PropertyGroup>
 	<ItemGroup>
 	  <PackageReference Include="IDisposableAnalyzers" Version="3.4.2">
