@@ -20,8 +20,7 @@
 		<Company>Panoramic Data Limited</Company>
 
 		<PackageReleaseNotes>
-			Improved error handling when EPC standby nodes are returning 502.
-			AthonetApiException now always contains the response body, if present and the HTTP status code.
+			Security fixes
 		</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>

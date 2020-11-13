@@ -3,6 +3,7 @@ using Athonet.Api.Exceptions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -53,7 +54,13 @@ namespace Athonet.Api
 
 				_logger.LogTrace($"{guid}: Request starting");
 
-				_logger.LogDebug($"{guid}: Request\n{request}");
+				var requestCleaned = string.Join("\n", request
+					.ToString()
+					.Split('\n')
+					.Select(line => line.StartsWith("  X-MOGWAPI-AUTH") ? "  X-MOGWAPI-AUTH: XXXXXXXXXXXXXX" : line)
+				);
+
+				_logger.LogDebug($"{guid}: Request\n{requestCleaned}");
 
 				var response = await base
 					.SendAsync(request, cancellationToken)
