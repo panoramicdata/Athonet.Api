@@ -1,7 +1,5 @@
-﻿using Athonet.Api.Data;
-using Athonet.Api.Exceptions;
+﻿using Athonet.Api.Exceptions;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -93,31 +91,7 @@ namespace Athonet.Api
 							.ReadAsStringAsync()
 							.ConfigureAwait(false);
 
-				// Do we have a body?
-				if (responseBody != null)
-				{
-					// Yes.  Try to deserialize an error response.
-					try
-					{
-						var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(
-							responseBody,
-							new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error }
-						);
-						if (errorResponse != null)
-						{
-							throw new AthonetApiException(response.StatusCode, errorResponse, responseBody);
-						}
-					}
-					catch (Exception exception)
-					{
-						// This will happen if:
-						// - the content is XML (JsonReaderException)
-						// - the content is Json, but not a valid ErrorResponse (JsonSerializationException)
-						throw new AthonetApiException(response.StatusCode, exception.Message, responseBody);
-					}
-				}
-
-				throw new AthonetApiException(response.StatusCode, response.StatusCode.ToString(), responseBody ?? string.Empty);
+				throw new AthonetApiException(response.StatusCode, responseBody ?? string.Empty);
 			}
 			catch (AthonetApiException)
 			{

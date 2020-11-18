@@ -20,7 +20,7 @@
 		<Company>Panoramic Data Limited</Company>
 
 		<PackageReleaseNotes>
-			Security fixes
+			Removed ErrorResponse, as it is used inconsistently by Athonet.
 		</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
