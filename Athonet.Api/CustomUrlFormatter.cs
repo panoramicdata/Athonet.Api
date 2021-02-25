@@ -27,8 +27,11 @@ namespace Athonet.Api
 
 				if (realType.IsEnum)
 				{
-					var cached = EnumMemberCache.GetOrAdd(realType, t => new ConcurrentDictionary<string, EnumMemberAttribute>());
-					enummember = cached.GetOrAdd(parameterValue.ToString(), val => realType.GetMember(val).First().GetCustomAttribute<EnumMemberAttribute>());
+					var cached = EnumMemberCache.GetOrAdd(realType, _ => new ConcurrentDictionary<string, EnumMemberAttribute>());
+					enummember = cached.GetOrAdd(
+						parameterValue.ToString(),
+						val => realType.GetMember(val)[0].GetCustomAttribute<EnumMemberAttribute>()
+					);
 				}
 			}
 
