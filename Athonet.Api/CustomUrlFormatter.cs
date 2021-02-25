@@ -11,7 +11,7 @@ namespace Athonet.Api
 	public class CustomUrlParameterFormatter : IUrlParameterFormatter
 	{
 		public static readonly ConcurrentDictionary<Type, ConcurrentDictionary<string, EnumMemberAttribute>> EnumMemberCache
-			= new ConcurrentDictionary<Type, ConcurrentDictionary<string, EnumMemberAttribute>>();
+			= new();
 
 		public virtual string? Format(object parameterValue, ICustomAttributeProvider attributeProvider, Type type)
 		{

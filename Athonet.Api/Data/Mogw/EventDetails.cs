@@ -96,7 +96,7 @@ namespace Athonet.Api.Data.Mogw
 		/// Example string to match against:
 		/// tac-lb83.tac-hb00.tac.epc.mnc340.mcc311.3gppnetwork.org
 		/// </summary>
-		private static readonly Regex TaiRegex = new Regex(@"^tac-lb(?<lowByte>[\d]{2})\.tac-hb(?<highByte>[\d]{2})\.tac\.epc\.mnc(?<mnc>[\d]+)\.mcc(?<mcc>[\d]+)\.3gppnetwork\.org$");
+		private static readonly Regex TaiRegex = new(@"^tac-lb(?<lowByte>[a-f\d]{2})\.tac-hb(?<highByte>[a-f\d]{2})\.tac\.epc\.mnc(?<mnc>[\d]+)\.mcc(?<mcc>[\d]+)\.3gppnetwork\.org$");
 
 		private static Tai GetTaiFromString(string taiRaw)
 		{
