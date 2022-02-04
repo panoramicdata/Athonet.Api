@@ -112,6 +112,9 @@ namespace Athonet.Api.Data.Mogw
         CreateSessionReject = 34,
 
         [EnumMember(Value = "air")]
-        Air = 35
+        Air = 35,
+
+        [EnumMember(Value = "air")]
+        AirFail = 36
     }
 }

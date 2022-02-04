@@ -20,7 +20,7 @@
 		<Company>Panoramic Data Limited</Company>
 
 		<PackageReleaseNotes>
-			Added "air" event type
+			Added "air_fail" event type
 		</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
