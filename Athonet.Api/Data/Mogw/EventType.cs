@@ -114,7 +114,7 @@ namespace Athonet.Api.Data.Mogw
         [EnumMember(Value = "air")]
         Air = 35,
 
-        [EnumMember(Value = "air")]
+        [EnumMember(Value = "air_fail")]
         AirFail = 36
     }
 }
