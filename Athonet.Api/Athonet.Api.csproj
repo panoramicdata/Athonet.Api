@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<Authors>Panoramic Data Limited</Authors>
 		<Description>A nuget package for interacting with the Athonet API.</Description>
-		<Copyright>Panoramic Data Limited 2020</Copyright>
+		<Copyright>Panoramic Data Limited 2020, 2022</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/panoramicdata/Athonet.Api</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/panoramicdata/Athonet.Api</RepositoryUrl>
