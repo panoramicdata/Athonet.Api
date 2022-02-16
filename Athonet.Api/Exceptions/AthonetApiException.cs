@@ -1,18 +1,14 @@
-﻿using System;
-using System.Net;
+﻿namespace Athonet.Api.Exceptions;
 
-namespace Athonet.Api.Exceptions
+public class AthonetApiException : Exception
 {
-	public class AthonetApiException : Exception
-	{
-		public HttpStatusCode HttpStatusCode { get; }
+    public HttpStatusCode HttpStatusCode { get; }
 
-		public string ResponseBody { get; }
+    public string ResponseBody { get; }
 
-		internal AthonetApiException(HttpStatusCode httpStatusCode, string responseBody) : base(httpStatusCode.ToString())
-		{
-			HttpStatusCode = httpStatusCode;
-			ResponseBody = responseBody;
-		}
-	}
+    internal AthonetApiException(HttpStatusCode httpStatusCode, string responseBody) : base(httpStatusCode.ToString())
+    {
+        HttpStatusCode = httpStatusCode;
+        ResponseBody = responseBody;
+    }
 }

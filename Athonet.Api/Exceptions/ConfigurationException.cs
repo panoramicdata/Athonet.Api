@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Athonet.Api.Exceptions
+﻿namespace Athonet.Api.Exceptions
 {
-	public class ConfigurationException : Exception
+    public class ConfigurationException : Exception
 	{
 		public ConfigurationException() : base()
 		{

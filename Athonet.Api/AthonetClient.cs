@@ -1,100 +1,91 @@
-﻿using Athonet.Api.Interfaces;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Refit;
-using System;
-using System.Net.Http;
+﻿namespace Athonet.Api;
 
-namespace Athonet.Api
+public class AthonetClient : IDisposable
 {
-	public class AthonetClient : IDisposable
-	{
-		private bool disposedValue;
-		private readonly HttpClient _httpClient;
-		private readonly ILogger? _logger;
-		private readonly AuthenticatedHttpHandler _authenticatedHttpHandler;
+    private bool disposedValue;
+    private readonly HttpClient _httpClient;
+    private readonly ILogger? _logger;
+    private readonly AuthenticatedHttpHandler _authenticatedHttpHandler;
 
-		public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
-		{
-			// Validation
-			if (options is null)
-			{
-				throw new ArgumentNullException(nameof(options));
-			}
-			options.Validate();
+    public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
+    {
+        // Validation
+        if (options is null)
+        {
+            throw new ArgumentNullException(nameof(options));
+        }
 
-			_logger = logger ?? new NullLogger<AthonetClient>();
+        options.Validate();
 
-			_authenticatedHttpHandler = new AuthenticatedHttpHandler(
-				options,
-				_logger);
-			_authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
-			_authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
+        _logger = logger ?? new NullLogger<AthonetClient>();
 
-			_httpClient = new HttpClient(_authenticatedHttpHandler)
-			{
-				BaseAddress = new Uri($"https://{options.Hostname}:{options.Port}"),
-			};
+        _authenticatedHttpHandler = new AuthenticatedHttpHandler(
+            options,
+            _logger);
+        _authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
+        _authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
-			_httpClient.DefaultRequestHeaders.Add("X-MOGWAPI-AUTH", $"{options.Username}:{options.Password}");
-			_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-			_httpClient.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
-			_logger.LogTrace("Constructor complete");
+        _httpClient = new HttpClient(_authenticatedHttpHandler)
+        {
+            BaseAddress = new Uri($"https://{options.Hostname}:{options.Port}"),
+        };
 
-			JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-			{
-				Converters = { new StringEnumConverter() }
-			};
+        _httpClient.DefaultRequestHeaders.Add("X-MOGWAPI-AUTH", $"{options.Username}:{options.Password}");
+        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+        _httpClient.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
+        _logger.LogTrace("{Message}", "Constructor complete");
 
-			var refitSettings = new RefitSettings
-			{
-				UrlParameterFormatter = new CustomUrlParameterFormatter(),
-				ContentSerializer = new NewtonsoftJsonContentSerializer(
-					new JsonSerializerSettings { Converters = { new StringEnumConverter() } }
-				)
-			};
+        JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+        {
+            Converters = { new StringEnumConverter() }
+        };
 
-			Hss = RestService.For<IHss>(_httpClient, refitSettings);
-			Mogw = RestService.For<IMogw>(_httpClient, refitSettings);
-		}
+        var refitSettings = new RefitSettings
+        {
+            UrlParameterFormatter = new CustomUrlParameterFormatter(),
+            ContentSerializer = new NewtonsoftJsonContentSerializer(
+                new JsonSerializerSettings { Converters = { new StringEnumConverter() } }
+            )
+        };
 
-		/// <summary>
-		/// The last HTTP request if AthonetClientOptions.StoreLastRequestAndResponse is true.
-		/// </summary>
-		public string? LastHttpRequest
-			=> _authenticatedHttpHandler.LastHttpRequest;
+        Hss = RestService.For<IHss>(_httpClient, refitSettings);
+        Mogw = RestService.For<IMogw>(_httpClient, refitSettings);
+    }
 
-		/// <summary>
-		/// The last HTTP response if AthonetClientOptions.StoreLastRequestAndResponse is true.
-		/// </summary>
-		public string? LastHttpResponse
-			=> _authenticatedHttpHandler.LastHttpResponse;
+    /// <summary>
+    /// The last HTTP request if AthonetClientOptions.StoreLastRequestAndResponse is true.
+    /// </summary>
+    public string? LastHttpRequest
+        => _authenticatedHttpHandler.LastHttpRequest;
 
-		public IHss Hss { get; }
+    /// <summary>
+    /// The last HTTP response if AthonetClientOptions.StoreLastRequestAndResponse is true.
+    /// </summary>
+    public string? LastHttpResponse
+        => _authenticatedHttpHandler.LastHttpResponse;
 
-		public IMogw Mogw { get; }
+    public IHss Hss { get; }
 
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposedValue)
-			{
-				if (disposing)
-				{
-					_httpClient?.Dispose();
-					_authenticatedHttpHandler?.Dispose();
-				}
+    public IMogw Mogw { get; }
 
-				disposedValue = true;
-			}
-		}
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                _httpClient?.Dispose();
+                _authenticatedHttpHandler?.Dispose();
+            }
 
-		public void Dispose()
-		{
-			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-			Dispose(disposing: true);
-			GC.SuppressFinalize(this);
-		}
-	}
+            disposedValue = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
 }

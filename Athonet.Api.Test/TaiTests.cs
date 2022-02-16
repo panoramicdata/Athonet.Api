@@ -1,13 +1,12 @@
 using Athonet.Api.Data.Mogw;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Athonet.Api.Test
 {
-	public class TaiTests : BaseTest
+    public class TaiTests : BaseTest
 	{
 		public TaiTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
 		{
