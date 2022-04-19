@@ -12,6 +12,9 @@ public class Event
     [DataMember(Name = "timestamp")]
     public int UnixTimestamp { get; set; }
 
+    [DataMember(Name = "timestampex")]
+    public long UnixTimestampMs { get; set; }
+
     [DataMember(Name = "id")]
     public int Id { get; set; }
 
