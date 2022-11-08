@@ -14,9 +14,9 @@ public class TaiTests : BaseTest
 			TaiRaw = "tac-lb83.tac-hb00.tac.epc.mnc340.mcc311.3gppnetwork.org"
 		};
 
-		evt.Tai.Should().BeOfType<Tai>();
-		evt.Tai.Plmn.Should().Be("311340");
-		evt.Tai.Tac.Should().Be(131);
+		_ = evt.Tai.Should().BeOfType<Tai>();
+		_ = evt.Tai.Plmn.Should().Be("311340");
+		_ = evt.Tai.Tac.Should().Be(131);
 	}
 
 	[Fact]
@@ -31,9 +31,9 @@ public class TaiTests : BaseTest
 			}
 		};
 
-		evt.Tai.Should().BeOfType<Tai>();
-		evt.Tai.Plmn.Should().Be("311340");
-		evt.Tai.Tac.Should().Be(131);
+		_ = evt.Tai.Should().BeOfType<Tai>();
+		_ = evt.Tai.Plmn.Should().Be("311340");
+		_ = evt.Tai.Tac.Should().Be(131);
 	}
 	[Fact]
 	public void JObject_Succeeds()
@@ -43,8 +43,8 @@ public class TaiTests : BaseTest
 			TaiRaw = JObject.Parse("{ \"Plmn\": \"311340\", \"Tac\": 131 }")
 		};
 
-		evt.Tai.Should().BeOfType<Tai>();
-		evt.Tai.Plmn.Should().Be("311340");
-		evt.Tai.Tac.Should().Be(131);
+		_ = evt.Tai.Should().BeOfType<Tai>();
+		_ = evt.Tai.Plmn.Should().Be("311340");
+		_ = evt.Tai.Tac.Should().Be(131);
 	}
 }
