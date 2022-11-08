@@ -2,7 +2,7 @@
 
 public class ConfigurationException : Exception
 {
-	public ConfigurationException() : base()
+	public ConfigurationException()
 	{
 	}
 
