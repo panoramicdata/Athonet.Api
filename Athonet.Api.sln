@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Athonet.Api", "Athonet.Api\Athonet.Api.csproj", "{8A91579E-7F4B-44BF-80F2-CBD5E951A9A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{406C11F9-6BE2-4C31-A422-6C7CAEF77CED}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		Athonet.Api.sln.vsspell = Athonet.Api.sln.vsspell
+		Athonet.Api.sln.vsspell.dic = Athonet.Api.sln.vsspell.dic
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md

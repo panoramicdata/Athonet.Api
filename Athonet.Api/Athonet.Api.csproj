@@ -21,12 +21,16 @@
 		<Company>Panoramic Data Limited</Company>
 
 		<PackageReleaseNotes>
-			Added "air_fail" event type
+			Code quality improvements.
+			Updated nuget packages.
+			Added symbols.
 		</PackageReleaseNotes>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
