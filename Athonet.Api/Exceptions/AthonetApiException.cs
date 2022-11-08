@@ -2,13 +2,13 @@
 
 public class AthonetApiException : Exception
 {
-    public HttpStatusCode HttpStatusCode { get; }
+	public HttpStatusCode HttpStatusCode { get; }
 
-    public string ResponseBody { get; }
+	public string ResponseBody { get; }
 
-    internal AthonetApiException(HttpStatusCode httpStatusCode, string responseBody) : base(httpStatusCode.ToString())
-    {
-        HttpStatusCode = httpStatusCode;
-        ResponseBody = responseBody;
-    }
+	internal AthonetApiException(HttpStatusCode httpStatusCode, string responseBody) : base(httpStatusCode.ToString())
+	{
+		HttpStatusCode = httpStatusCode;
+		ResponseBody = responseBody;
+	}
 }

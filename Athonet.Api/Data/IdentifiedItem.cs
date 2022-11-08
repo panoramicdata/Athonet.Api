@@ -6,9 +6,9 @@
 [DataContract]
 public abstract class IdentifiedItem
 {
-    /// <summary>
-    /// Resource ID
-    /// </summary>
-    [DataMember(Name = "id")]
-    public int Id { get; set; }
+	/// <summary>
+	/// Resource ID
+	/// </summary>
+	[DataMember(Name = "id")]
+	public int Id { get; set; }
 }

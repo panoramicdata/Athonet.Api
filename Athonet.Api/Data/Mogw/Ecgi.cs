@@ -3,9 +3,9 @@
 [DataContract]
 public class Ecgi
 {
-    [DataMember(Name = "plmn")]
-    public string Plmn { get; set; } = string.Empty;
+	[DataMember(Name = "plmn")]
+	public string Plmn { get; set; } = string.Empty;
 
-    [DataMember(Name = "cellid")]
-    public int Cellid { get; set; }
+	[DataMember(Name = "cellid")]
+	public int Cellid { get; set; }
 }
