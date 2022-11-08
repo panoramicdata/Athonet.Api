@@ -1,17 +1,16 @@
-﻿namespace Athonet.Api.Exceptions
+﻿namespace Athonet.Api.Exceptions;
+
+public class ConfigurationException : Exception
 {
-    public class ConfigurationException : Exception
+	public ConfigurationException() : base()
 	{
-		public ConfigurationException() : base()
-		{
-		}
+	}
 
-		public ConfigurationException(string message) : base(message)
-		{
-		}
+	public ConfigurationException(string message) : base(message)
+	{
+	}
 
-		public ConfigurationException(string message, Exception innerException) : base(message, innerException)
-		{
-		}
+	public ConfigurationException(string message, Exception innerException) : base(message, innerException)
+	{
 	}
 }
