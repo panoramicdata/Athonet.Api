@@ -1,4 +1,6 @@
-﻿namespace Athonet.Api.Test;
+﻿using System.Threading;
+
+namespace Athonet.Api.Test;
 
 public class BaseTest
 {
@@ -25,10 +27,12 @@ public class BaseTest
 		options.Validate();
 
 		// Create client
-		Client = new AthonetClient(options,
-		Logger);
+		Client = new AthonetClient(options, Logger);
 	}
 
+	protected static CancellationToken CancellationToken => CancellationToken.None;
+
 	protected AthonetClient Client { get; set; }
+
 	protected ICacheLogger Logger { get; }
 }

@@ -1,11 +1,7 @@
 namespace Athonet.Api.Test;
 
-public class MogwTests : BaseTest
+public class MogwTests(ITestOutputHelper testOutputHelper) : BaseTest(testOutputHelper)
 {
-	public MogwTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-	{
-	}
-
 	[Fact]
 	public async Task GetEvents_Succeeds()
 	{

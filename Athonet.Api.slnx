@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Athonet.Api.sln.vsspell" />
+    <File Path="Athonet.Api.sln.vsspell.dic" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="version.json" />
+  </Folder>
+  <Project Path="Athonet.Api.Test/Athonet.Api.Test.csproj" />
+  <Project Path="Athonet.Api/Athonet.Api.csproj" />
+</Solution>

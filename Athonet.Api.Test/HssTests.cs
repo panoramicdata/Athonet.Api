@@ -1,95 +1,83 @@
+using System.Threading;
+
 namespace Athonet.Api.Test;
 
-public class HssTests : BaseTest
+public class HssTests(ITestOutputHelper testOutputHelper) : BaseTest(testOutputHelper)
 {
-	public HssTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-	{
-	}
-
 	[Fact]
 	public async Task GetUsimProfiles_Succeeds()
 	{
 		// Get all
 		var usimProfiles = await Client
 			.Hss
-			.GetUsimProfilesAsync()
-			.ConfigureAwait(false);
+			.GetUsimProfilesAsync(CancellationToken);
 
-		usimProfiles.Should().BeOfType<Page<UsimProfile>>();
-		usimProfiles.Should().NotBeNull();
+		_ = usimProfiles.Should().BeOfType<Page<UsimProfile>>();
+		_ = usimProfiles.Should().NotBeNull();
 
 		// Get individual
 		var usimProfile = await Client
 			.Hss
-			.GetUsimProfileAsync(usimProfiles.Results[0].Id)
-			.ConfigureAwait(false);
+			.GetUsimProfileAsync(usimProfiles.Results[0].Id, CancellationToken);
 
-		usimProfile.Should().BeOfType<UsimProfile>();
-		usimProfile.Should().NotBeNull();
+		_ = usimProfile.Should().BeOfType<UsimProfile>();
+		_ = usimProfile.Should().NotBeNull();
 	}
 
 	[Fact]
 	public async Task GetApnProfilesByUsimProfileId_Succeeds()
 	{
-		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync()
-			.ConfigureAwait(false);
+		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
 
 		// Get all
 		var apnProfiles = await Client
 			.Hss
-			.GetApnProfilesByUsimProfileIdAsync(defaultUsimProfileId)
-			.ConfigureAwait(false);
+			.GetApnProfilesByUsimProfileIdAsync(defaultUsimProfileId, CancellationToken);
 
-		apnProfiles.Should().BeOfType<Page<ApnProfile>>();
-		apnProfiles.Should().NotBeNull();
+		_ = apnProfiles.Should().BeOfType<Page<ApnProfile>>();
+		_ = apnProfiles.Should().NotBeNull();
 	}
 
 	[Fact]
 	public async Task GetPublicLandMobileNetworks_Succeeds()
 	{
-		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync()
-			.ConfigureAwait(false);
+		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
 
 		// Get all
 		var plmns = await Client
 			.Hss
-			.GetPublicLandMobileNetworksAsync(defaultUsimProfileId)
-			.ConfigureAwait(false);
+			.GetPublicLandMobileNetworksAsync(defaultUsimProfileId, CancellationToken);
 
-		plmns.Should().BeOfType<Page<PublicLandMobileNetwork>>();
-		plmns.Should().NotBeNull();
+		_ = plmns.Should().BeOfType<Page<PublicLandMobileNetwork>>();
+		_ = plmns.Should().NotBeNull();
 	}
 
 	[Fact]
 	public async Task GetClosedSubscriberGroups_Succeeds()
 	{
-		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync()
-			.ConfigureAwait(false);
+		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
 
 		// Get all
 		var csgs = await Client
 			.Hss
-			.GetClosedSubscriberGroupsAsync(defaultUsimProfileId)
-			.ConfigureAwait(false);
+			.GetClosedSubscriberGroupsAsync(defaultUsimProfileId, CancellationToken);
 
-		csgs.Should().BeOfType<Page<ClosedSubscriberGroup>>();
-		csgs.Should().NotBeNull();
+		_ = csgs.Should().BeOfType<Page<ClosedSubscriberGroup>>();
+		_ = csgs.Should().NotBeNull();
 	}
 
 	[Fact]
 	public async Task GetTeleservices_Succeeds()
 	{
-		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync()
-			.ConfigureAwait(false);
+		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
 
 		// Get all
 		var teleservices = await Client
 			.Hss
-			.GetTeleservicesAsync(defaultUsimProfileId)
-			.ConfigureAwait(false);
+			.GetTeleservicesAsync(defaultUsimProfileId, CancellationToken);
 
-		teleservices.Should().BeOfType<Page<Teleservice>>();
-		teleservices.Should().NotBeNull();
+		_ = teleservices.Should().BeOfType<Page<Teleservice>>();
+		_ = teleservices.Should().NotBeNull();
 	}
 
 	[Fact]
@@ -98,20 +86,18 @@ public class HssTests : BaseTest
 		// Get all
 		var apns = await Client
 			.Hss
-			.GetApnsAsync()
-			.ConfigureAwait(false);
+			.GetApnsAsync(CancellationToken);
 
-		apns.Should().BeOfType<Page<Apn>>();
-		apns.Should().NotBeNull();
+		_ = apns.Should().BeOfType<Page<Apn>>();
+		_ = apns.Should().NotBeNull();
 
 		// Get individual
 		var apn = await Client
 			.Hss
-			.GetApnAsync(apns.Results[0].Id)
-			.ConfigureAwait(false);
+			.GetApnAsync(apns.Results[0].Id, CancellationToken);
 
-		apn.Should().BeOfType<Apn>();
-		apn.Should().NotBeNull();
+		_ = apn.Should().BeOfType<Apn>();
+		_ = apn.Should().NotBeNull();
 	}
 
 	[Fact]
@@ -120,27 +106,25 @@ public class HssTests : BaseTest
 		// Get all
 		var apnProfiles = await Client
 			.Hss
-			.GetApnProfilesAsync()
-			.ConfigureAwait(false);
+			.GetApnProfilesAsync(CancellationToken);
 
-		apnProfiles.Should().BeOfType<Page<ApnProfile>>();
-		apnProfiles.Should().NotBeNull();
+		_ = apnProfiles.Should().BeOfType<Page<ApnProfile>>();
+		_ = apnProfiles.Should().NotBeNull();
 
 		// Get individual
 		var apnProfile = await Client
 			.Hss
-			.GetApnProfileAsync(apnProfiles.Results[0].Id)
-			.ConfigureAwait(false);
+			.GetApnProfileAsync(apnProfiles.Results[0].Id, CancellationToken);
 
-		apnProfile.Should().BeOfType<ApnProfile>();
-		apnProfile.Should().NotBeNull();
+		_ = apnProfile.Should().BeOfType<ApnProfile>();
+		_ = apnProfile.Should().NotBeNull();
 	}
 
-	private async Task<int> GetDefaultUsimProfileIdAsync()
+	private async Task<int> GetDefaultUsimProfileIdAsync(CancellationToken cancellationToken)
 	{
 		var usimProfiles = await Client
 		.Hss
-		.GetUsimProfilesAsync()
+		.GetUsimProfilesAsync(cancellationToken)
 		.ConfigureAwait(false);
 		return
 			usimProfiles.Results.FirstOrDefault(usp => usp.Default)?.Id
