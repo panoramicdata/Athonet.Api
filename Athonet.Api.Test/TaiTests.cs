@@ -1,11 +1,7 @@
 namespace Athonet.Api.Test;
 
-public class TaiTests : BaseTest
+public class TaiTests
 {
-	public TaiTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-	{
-	}
-
 	[Fact]
 	public void String_Succeeds()
 	{

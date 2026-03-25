@@ -36,7 +36,7 @@ internal class AuthenticatedHttpHandler : HttpClientHandler
 				LastHttpRequest = request.ToString();
 				if (request.Content != null)
 				{
-					LastHttpRequest += $"\n{await request.Content.ReadAsStringAsync().ConfigureAwait(false)}";
+					LastHttpRequest += $"\n{await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)}";
 				}
 			}
 
@@ -59,7 +59,7 @@ internal class AuthenticatedHttpHandler : HttpClientHandler
 
 			var content = await response
 				.Content
-				.ReadAsStringAsync()
+				.ReadAsStringAsync(cancellationToken)
 				.ConfigureAwait(false);
 			_logger.LogDebug("{Guid}: Response ({ResponseStatusCode})\n{Content}",
 				guid,
@@ -72,7 +72,7 @@ internal class AuthenticatedHttpHandler : HttpClientHandler
 				LastHttpResponse = response.ToString();
 				if (response.Content != null)
 				{
-					LastHttpResponse += $"\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}";
+					LastHttpResponse += $"\n{await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)}";
 				}
 			}
 
@@ -91,7 +91,7 @@ internal class AuthenticatedHttpHandler : HttpClientHandler
 					? null
 					: await response
 						.Content
-						.ReadAsStringAsync()
+						.ReadAsStringAsync(cancellationToken)
 						.ConfigureAwait(false);
 
 			throw new AthonetApiException(response.StatusCode, responseBody ?? string.Empty);

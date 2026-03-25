@@ -10,10 +10,7 @@ public class AthonetClient : IDisposable
 	public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
 	{
 		// Validation
-		if (options is null)
-		{
-			throw new ArgumentNullException(nameof(options));
-		}
+		ArgumentNullException.ThrowIfNull(options);
 
 		options.Validate();
 
@@ -22,7 +19,7 @@ public class AthonetClient : IDisposable
 		_authenticatedHttpHandler = new AuthenticatedHttpHandler(
 			options,
 			_logger);
-		_authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
+		_ = _authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
 		_authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
 		_httpClient = new HttpClient(_authenticatedHttpHandler)

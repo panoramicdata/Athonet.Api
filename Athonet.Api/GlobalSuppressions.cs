@@ -41,3 +41,7 @@
 	Scope = "type",
 	Target = "~T:Athonet.Api.Data.Mogw.Event")
 ]
+[assembly: SuppressMessage(
+	"Performance", "CA1873:Avoid potentially expensive logging",
+	Justification = "Performance gains not worth the implementation cost")
+]

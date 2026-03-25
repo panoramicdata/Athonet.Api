@@ -8,7 +8,7 @@ public interface IHss
 	/// <param name="cancellationToken">The CancellationToken</param>
 	[Get("/API/hss/usim-profiles")]
 	Task<Page<UsimProfile>> GetUsimProfilesAsync(
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get USIM profile by id
@@ -18,7 +18,7 @@ public interface IHss
 	[Get("/API/hss/usim-profiles/{usimProfileId}")]
 	Task<UsimProfile> GetUsimProfileAsync(
 		int usimProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get APN profiles by USIM Profile ID
@@ -28,7 +28,7 @@ public interface IHss
 	[Get("/API/hss/usim-profiles/{usimProfileId}/apn-profiles")]
 	Task<Page<ApnProfile>> GetApnProfilesByUsimProfileIdAsync(
 		int usimProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get PLMNs by USIM Profile ID
@@ -38,7 +38,7 @@ public interface IHss
 	[Get("/API/hss/usim-profiles/{usimProfileId}/plmns")]
 	Task<Page<PublicLandMobileNetwork>> GetPublicLandMobileNetworksAsync(
 		int usimProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Closed Subscriber Groups by USIM Profile ID
@@ -48,7 +48,7 @@ public interface IHss
 	[Get("/API/hss/usim-profiles/{usimProfileId}/csgs-list")]
 	Task<Page<ClosedSubscriberGroup>> GetClosedSubscriberGroupsAsync(
 		int usimProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Teleservices by USIM Profile ID
@@ -58,7 +58,7 @@ public interface IHss
 	[Get("/API/hss/usim-profiles/{usimProfileId}/teleservices")]
 	Task<Page<Teleservice>> GetTeleservicesAsync(
 		int usimProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Apns
@@ -66,7 +66,7 @@ public interface IHss
 	/// <param name="cancellationToken">The CancellationToken</param>
 	[Get("/API/hss/apns")]
 	Task<Page<Apn>> GetApnsAsync(
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Apns
@@ -76,7 +76,7 @@ public interface IHss
 	[Get("/API/hss/apns/{apnId}")]
 	Task<Apn> GetApnAsync(
 		int apnId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Apn Profiles
@@ -84,7 +84,7 @@ public interface IHss
 	/// <param name="cancellationToken">The CancellationToken</param>
 	[Get("/API/hss/apn-profiles")]
 	Task<Page<ApnProfile>> GetApnProfilesAsync(
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get Apn Profile by ID
@@ -94,7 +94,7 @@ public interface IHss
 	[Get("/API/hss/apn-profiles/{apnProfileId}")]
 	Task<ApnProfile> GetApnProfileAsync(
 		int apnProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get APN by APN Profile ID
@@ -104,5 +104,5 @@ public interface IHss
 	[Get("/API/hss/apn-profiles/{apnProfileId}/apn")]
 	Task<Apn> GetApnByApnProfileIdAsync(
 		int apnProfileId,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 }

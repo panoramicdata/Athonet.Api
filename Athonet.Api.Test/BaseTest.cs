@@ -1,11 +1,19 @@
-﻿namespace Athonet.Api.Test;
+﻿using Microsoft.Extensions.Logging;
+using System.Threading;
+using Xunit.Microsoft.DependencyInjection.Abstracts;
 
-public class BaseTest
+namespace Athonet.Api.Test;
+
+public class BaseTest : TestBed<Fixture>
 {
-	public BaseTest(ITestOutputHelper testOutputHelper)
+	protected static CancellationToken CancellationToken => TestContext.Current.CancellationToken;
+
+ public BaseTest(ITestOutputHelper testOutputHelper, Fixture fixture) : base(testOutputHelper, fixture)
 	{
-		// Create logger
-		Logger = testOutputHelper.BuildLogger();
+       var loggerFactory = fixture.GetService<ILoggerFactory>(testOutputHelper)
+			?? throw new InvalidOperationException("LoggerFactory is null");
+
+		Logger = loggerFactory.CreateLogger(GetType());
 
 		// Load config
 		var config = JsonConvert.DeserializeObject<TestConfiguration>(File.ReadAllText("../../../appsettings.json"));
@@ -30,5 +38,6 @@ public class BaseTest
 	}
 
 	protected AthonetClient Client { get; set; }
-	protected ICacheLogger Logger { get; }
+
+	protected ILogger Logger { get; }
 }

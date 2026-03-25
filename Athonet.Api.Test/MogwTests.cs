@@ -1,21 +1,16 @@
 namespace Athonet.Api.Test;
 
-public class MogwTests : BaseTest
+public class MogwTests(ITestOutputHelper testOutputHelper, Fixture fixture) : BaseTest(testOutputHelper, fixture)
 {
-	public MogwTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-	{
-	}
-
 	[Fact]
 	public async Task GetEvents_Succeeds()
 	{
 		// Get all
 		var events = await Client
 			.Mogw
-			.GetEventsAsync(orderBy: "id", limit: 10)
-			.ConfigureAwait(false);
+			.GetEventsAsync(orderBy: "id", limit: 10, cancellationToken: CancellationToken);
 
-		events.Should().BeOfType<MogwEventSet>();
-		events.Should().NotBeNull();
+		_ = events.Should().BeOfType<MogwEventSet>();
+		_ = events.Should().NotBeNull();
 	}
 }
