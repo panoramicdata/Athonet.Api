@@ -27,7 +27,7 @@ public class HssTests(ITestOutputHelper testOutputHelper, Fixture fixture) : Bas
 	[Fact]
 	public async Task GetApnProfilesByUsimProfileId_Succeeds()
 	{
-     var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
+		var defaultUsimProfileId = await GetDefaultUsimProfileIdAsync(CancellationToken);
 
 		// Get all
 		var apnProfiles = await Client

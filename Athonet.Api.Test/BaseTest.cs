@@ -6,11 +6,9 @@ namespace Athonet.Api.Test;
 
 public class BaseTest : TestBed<Fixture>
 {
-	protected static CancellationToken CancellationToken => TestContext.Current.CancellationToken;
-
- public BaseTest(ITestOutputHelper testOutputHelper, Fixture fixture) : base(testOutputHelper, fixture)
+	public BaseTest(ITestOutputHelper testOutputHelper, Fixture fixture) : base(testOutputHelper, fixture)
 	{
-       var loggerFactory = fixture.GetService<ILoggerFactory>(testOutputHelper)
+		var loggerFactory = fixture.GetService<ILoggerFactory>(testOutputHelper)
 			?? throw new InvalidOperationException("LoggerFactory is null");
 
 		Logger = loggerFactory.CreateLogger(GetType());
@@ -33,9 +31,10 @@ public class BaseTest : TestBed<Fixture>
 		options.Validate();
 
 		// Create client
-		Client = new AthonetClient(options,
-		Logger);
+		Client = new AthonetClient(options, Logger);
 	}
+
+	protected static CancellationToken CancellationToken => TestContext.Current.CancellationToken;
 
 	protected AthonetClient Client { get; set; }
 
