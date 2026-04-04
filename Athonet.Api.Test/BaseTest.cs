@@ -14,14 +14,15 @@ public class BaseTest : TestBed<Fixture>
 		Logger = loggerFactory.CreateLogger(GetType());
 
 		// Load config
-		var config = JsonConvert.DeserializeObject<TestConfiguration>(File.ReadAllText("../../../appsettings.json"));
+		var config = JsonConvert.DeserializeObject<TestConfiguration>(File.ReadAllText("../../../appsettings.json"))
+			?? throw new InvalidOperationException("Failed to deserialize test configuration");
 		var credentials = config.Credentials.Single(c => c.CredentialId == config.ActiveCredentialId);
 
 		var options = new AthonetClientOptions
 		{
 			Username = credentials.Username,
 			Password = credentials.Password,
-			Certificate = new X509Certificate2(credentials.CertificateFile, credentials.CertificatePassword),
+			Certificate = X509CertificateLoader.LoadPkcs12FromFile(credentials.CertificateFile, credentials.CertificatePassword),
 			Hostname = credentials.Hostname,
 			Port = credentials.Port,
 			IgnoreSslCertificateErrors = true,

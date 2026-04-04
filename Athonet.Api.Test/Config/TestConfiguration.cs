@@ -2,17 +2,17 @@
 
 internal class TestConfiguration
 {
-	public string ActiveCredentialId { get; set; }
-	public TestCredential[] Credentials { get; set; }
+	public required string ActiveCredentialId { get; set; }
+	public required TestCredential[] Credentials { get; set; }
 }
 
 internal class TestCredential
 {
-	public string CredentialId { get; set; }
-	public string Username { get; set; }
-	public string Password { get; set; }
-	public string CertificateFile { get; set; }
-	public string Hostname { get; set; }
+	public required string CredentialId { get; set; }
+	public required string Username { get; set; }
+	public required string Password { get; set; }
+	public required string CertificateFile { get; set; }
+	public required string Hostname { get; set; }
 	public int Port { get; set; } = 446;
-	public string CertificatePassword { get; set; }
+	public required string CertificatePassword { get; set; }
 }

@@ -1,5 +1,8 @@
 ﻿namespace Athonet.Api.Interfaces;
 
+/// <summary>
+/// HSS (Home Subscriber Server) API interface.
+/// </summary>
 public interface IHss
 {
 	/// <summary>
@@ -13,7 +16,7 @@ public interface IHss
 	/// <summary>
 	/// Get USIM profile by id
 	/// </summary>
-	/// <param name="id">The USIM profile ID</param>
+	/// <param name="usimProfileId">The USIM profile ID</param>
 	/// <param name="cancellationToken">The CancellationToken</param>
 	[Get("/API/hss/usim-profiles/{usimProfileId}")]
 	Task<UsimProfile> GetUsimProfileAsync(
@@ -69,9 +72,9 @@ public interface IHss
 		CancellationToken cancellationToken);
 
 	/// <summary>
-	/// Get Apns
+	/// Get APN by ID
 	/// </summary>
-	/// <param name="apnProfileId">The APN ID</param>
+	/// <param name="apnId">The APN ID</param>
 	/// <param name="cancellationToken">The CancellationToken</param>
 	[Get("/API/hss/apns/{apnId}")]
 	Task<Apn> GetApnAsync(

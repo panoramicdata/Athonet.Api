@@ -361,3 +361,4 @@ appsettings.*.json
 *.p12
 *.der
 /Athonet.Api/nuget-api-key.txt
+nuget-key.txt

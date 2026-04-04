@@ -54,6 +54,9 @@ public class UsimProfile : NamedIdentifiedItem
     [DataMember(Name = "s6dgr_nam")]
     public int S6dgrNam { get; set; } = 3;
 
+    /// <summary>
+    /// The regional subscriptions profile.
+    /// </summary>
     [DataMember(Name = "regional_subscriptions_profile")]
     public object? RegionalSubscriptionsProfile { get; set; }
 }

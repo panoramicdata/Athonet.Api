@@ -1,5 +1,8 @@
 ﻿namespace Athonet.Api;
 
+/// <summary>
+/// Client for interacting with the Athonet API.
+/// </summary>
 public class AthonetClient : IDisposable
 {
 	private bool disposedValue;
@@ -7,6 +10,11 @@ public class AthonetClient : IDisposable
 	private readonly ILogger? _logger;
 	private readonly AuthenticatedHttpHandler _authenticatedHttpHandler;
 
+	/// <summary>
+	/// Initializes a new instance of the <see cref="AthonetClient"/> class.
+	/// </summary>
+	/// <param name="options">The client connection options.</param>
+	/// <param name="logger">An optional logger instance.</param>
 	public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
 	{
 		// Validation
@@ -19,7 +27,7 @@ public class AthonetClient : IDisposable
 		_authenticatedHttpHandler = new AuthenticatedHttpHandler(
 			options,
 			_logger);
-		_ = _authenticatedHttpHandler.ClientCertificates.Add(options.Certificate);
+		_ = _authenticatedHttpHandler.ClientCertificates.Add(options.Certificate!);
 		_authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
 		_httpClient = new HttpClient(_authenticatedHttpHandler)
@@ -61,10 +69,20 @@ public class AthonetClient : IDisposable
 	public string? LastHttpResponse
 		=> _authenticatedHttpHandler.LastHttpResponse;
 
+	/// <summary>
+	/// The HSS API interface.
+	/// </summary>
 	public IHss Hss { get; }
 
+	/// <summary>
+	/// The MoGW API interface.
+	/// </summary>
 	public IMogw Mogw { get; }
 
+	/// <summary>
+	/// Releases the unmanaged resources and optionally releases the managed resources.
+	/// </summary>
+	/// <param name="disposing">Whether to release managed resources.</param>
 	protected virtual void Dispose(bool disposing)
 	{
 		if (!disposedValue)
@@ -79,6 +97,7 @@ public class AthonetClient : IDisposable
 		}
 	}
 
+	/// <inheritdoc />
 	public void Dispose()
 	{
 		// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

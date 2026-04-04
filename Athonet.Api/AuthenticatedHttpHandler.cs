@@ -1,6 +1,6 @@
 ﻿namespace Athonet.Api;
 
-internal class AuthenticatedHttpHandler : HttpClientHandler
+internal sealed class AuthenticatedHttpHandler : HttpClientHandler
 {
 	private readonly ILogger _logger;
 	private readonly AthonetClientOptions _options;
@@ -19,10 +19,10 @@ internal class AuthenticatedHttpHandler : HttpClientHandler
 		}
 	}
 
-	private bool DangerousAcceptAnyServerCertificateValidator(
+	private static new bool DangerousAcceptAnyServerCertificateValidator(
 		HttpRequestMessage _,
-		X509Certificate2 __,
-		X509Chain ___,
+		X509Certificate2? __,
+		X509Chain? ___,
 		SslPolicyErrors ____)
 		=> true;
 
