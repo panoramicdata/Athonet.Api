@@ -14,7 +14,9 @@ public class BaseTest : TestBed<Fixture>
 		Logger = loggerFactory.CreateLogger(GetType());
 
 		// Load config
-		var config = JsonConvert.DeserializeObject<TestConfiguration>(File.ReadAllText("../../../appsettings.json"))
+		var config = JsonSerializer.Deserialize<TestConfiguration>(
+			File.ReadAllText("../../../appsettings.json"),
+			new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
 			?? throw new InvalidOperationException("Failed to deserialize test configuration");
 		var credentials = config.Credentials.Single(c => c.CredentialId == config.ActiveCredentialId);
 

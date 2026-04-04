@@ -2,6 +2,7 @@
 
 A .NET client library for the Athonet API, providing access to HSS and MOGW endpoints.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Nuget](https://img.shields.io/nuget/v/Athonet.Api)](https://www.nuget.org/packages/Athonet.Api/)
 [![Nuget](https://img.shields.io/nuget/dt/Athonet.Api)](https://www.nuget.org/packages/Athonet.Api/)
 ![GitHub](https://img.shields.io/github/license/panoramicdata/Athonet.Api)

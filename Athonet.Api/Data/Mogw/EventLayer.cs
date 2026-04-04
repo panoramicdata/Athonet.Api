@@ -3,7 +3,6 @@
 /// <summary>
 /// The event layer.
 /// </summary>
-[DataContract]
 public enum EventLayer
 {
 	/// <summary>

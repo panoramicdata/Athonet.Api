@@ -3,18 +3,17 @@
 /// <summary>
 /// E-UTRAN Cell Global Identifier.
 /// </summary>
-[DataContract]
 public class Ecgi
 {
 	/// <summary>
 	/// The PLMN identifier.
 	/// </summary>
-	[DataMember(Name = "plmn")]
+	[JsonPropertyName("plmn")]
 	public string Plmn { get; set; } = string.Empty;
 
 	/// <summary>
 	/// The cell identifier.
 	/// </summary>
-	[DataMember(Name = "cellid")]
+	[JsonPropertyName("cellid")]
 	public int Cellid { get; set; }
 }

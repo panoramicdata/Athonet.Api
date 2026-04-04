@@ -36,7 +36,7 @@ public class TaiTests
 	{
 		var evt = new EventDetails
 		{
-			TaiRaw = JObject.Parse("{ \"Plmn\": \"311340\", \"Tac\": 131 }")
+			TaiRaw = JsonDocument.Parse("{ \"plmn\": \"311340\", \"tac\": 131 }").RootElement
 		};
 
 		_ = evt.Tai.Should().BeOfType<Tai>();

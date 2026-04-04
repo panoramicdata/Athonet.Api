@@ -3,30 +3,29 @@
 /// <summary>
 /// A Public Land Mobile Network
 /// </summary>
-[DataContract]
 public class PublicLandMobileNetwork : IdentifiedItem
 {
     /// <summary>
     /// The Mobile Country Code
     /// </summary>
-    [DataMember(Name = "mcc")]
+    [JsonPropertyName("mcc")]
     public int MobileCountryCode { get; set; }
 
     /// <summary>
     /// The Mobile Country Code ID
     /// </summary>
-    [DataMember(Name = "mcc_id")]
+    [JsonPropertyName("mcc_id")]
     public int MobileCountryCodeId { get; set; }
 
     /// <summary>
     /// The mobile network code
     /// </summary>
-    [DataMember(Name = "default")]
+    [JsonPropertyName("default")]
     public int MobileNetworkCode { get; set; }
 
     /// <summary>
     /// The operator
     /// </summary>
-    [DataMember(Name = "operator")]
+    [JsonPropertyName("operator")]
     public string? Operator { get; set; }
 }

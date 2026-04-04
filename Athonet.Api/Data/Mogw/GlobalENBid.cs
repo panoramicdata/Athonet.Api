@@ -3,18 +3,17 @@
 /// <summary>
 /// Global eNodeB Identifier.
 /// </summary>
-[DataContract]
 public class GlobalENodeBId
 {
 	/// <summary>
 	/// The PLMN identifier.
 	/// </summary>
-	[DataMember(Name = "plmn")]
+	[JsonPropertyName("plmn")]
 	public string Plmn { get; set; } = string.Empty;
 
 	/// <summary>
 	/// The Home eNodeB identifier.
 	/// </summary>
-	[DataMember(Name = "homeENBid")]
+	[JsonPropertyName("homeENBid")]
 	public int HomeENodeBId { get; set; }
 }

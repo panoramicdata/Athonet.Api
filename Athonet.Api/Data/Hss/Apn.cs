@@ -3,12 +3,11 @@
 /// <summary>
 /// An APN
 /// </summary>
-[DataContract]
 public class Apn : NamedIdentifiedItem
 {
     /// <summary>
     /// The PDP type
     /// </summary>
-    [DataMember(Name = "pdp_type")]
+    [JsonPropertyName("pdp_type")]
     public int PdpType { get; set; }
 }

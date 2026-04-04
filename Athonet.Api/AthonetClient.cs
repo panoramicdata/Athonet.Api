@@ -40,17 +40,15 @@ public class AthonetClient : IDisposable
 		_httpClient.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
 		_logger.LogTrace("{Message}", "Constructor complete");
 
-		JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+		var jsonSerializerOptions = new JsonSerializerOptions
 		{
-			Converters = { new StringEnumConverter() }
+			Converters = { new JsonStringEnumConverter() }
 		};
 
 		var refitSettings = new RefitSettings
 		{
 			UrlParameterFormatter = new CustomUrlParameterFormatter(),
-			ContentSerializer = new NewtonsoftJsonContentSerializer(
-				new JsonSerializerSettings { Converters = { new StringEnumConverter() } }
-			)
+			ContentSerializer = new SystemTextJsonContentSerializer(jsonSerializerOptions)
 		};
 
 		Hss = RestService.For<IHss>(_httpClient, refitSettings);

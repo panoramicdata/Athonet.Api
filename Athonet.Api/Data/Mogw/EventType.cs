@@ -3,7 +3,6 @@
 /// <summary>
 /// The event type.
 /// </summary>
-[DataContract]
 public enum EventType
 {
 	/// <summary>

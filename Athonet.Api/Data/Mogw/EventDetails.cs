@@ -3,151 +3,150 @@
 /// <summary>
 /// Detailed information about a MoGW event.
 /// </summary>
-[DataContract]
 public class EventDetails
 {
 	/// <summary>
 	/// The event layer.
 	/// </summary>
-	[DataMember(Name = "layer")]
+	[JsonPropertyName("layer")]
 	public EventLayer Layer { get; set; }
 
 	/// <summary>
 	/// The procedure name.
 	/// </summary>
-	[DataMember(Name = "proc")]
+	[JsonPropertyName("proc")]
 	public string Proc { get; set; } = string.Empty;
 
 	/// <summary>
 	/// The event type.
 	/// </summary>
-	[DataMember(Name = "type")]
+	[JsonPropertyName("type")]
 	public EventType Type { get; set; }
 
 	/// <summary>
 	/// The IP address.
 	/// </summary>
-	[DataMember(Name = "ip")]
+	[JsonPropertyName("ip")]
 	public object? Ip { get; set; }
 
 	/// <summary>
 	/// The Unix timestamp in seconds.
 	/// </summary>
-	[DataMember(Name = "timestamp")]
+	[JsonPropertyName("timestamp")]
 	public int UnixTimestamp { get; set; }
 
 	/// <summary>
 	/// The Global eNodeB Identifier.
 	/// </summary>
-	[DataMember(Name = "globalENBid")]
+	[JsonPropertyName("globalENBid")]
 	public GlobalENodeBId? GlobalENodeBId { get; set; }
 
 	/// <summary>
 	/// The Unix timestamp in milliseconds.
 	/// </summary>
-	[DataMember(Name = "timestampex")]
+	[JsonPropertyName("timestampex")]
 	public long UnixTimestampMs { get; set; }
 
 	/// <summary>
 	/// The eNodeB name.
 	/// </summary>
-	[DataMember(Name = "ENBname")]
+	[JsonPropertyName("ENBname")]
 	public string? ENodeBName { get; set; }
 
 	/// <summary>
 	/// The cause of the event.
 	/// </summary>
-	[DataMember(Name = "cause")]
+	[JsonPropertyName("cause")]
 	public string? Cause { get; set; }
 
 	/// <summary>
 	/// The International Mobile Subscriber Identity.
 	/// </summary>
-	[DataMember(Name = "imsi")]
+	[JsonPropertyName("imsi")]
 	public string? Imsi { get; set; }
 
 	/// <summary>
 	/// The PDN Gateway IP addresses.
 	/// </summary>
-	[DataMember(Name = "pgw_ip")]
+	[JsonPropertyName("pgw_ip")]
 	public IList<string>? PgwIp { get; set; }
 
 	/// <summary>
 	/// The bearer identifier.
 	/// </summary>
-	[DataMember(Name = "bearer_id")]
+	[JsonPropertyName("bearer_id")]
 	public string? BearerId { get; set; }
 
 	/// <summary>
 	/// The Access Point Name.
 	/// </summary>
-	[DataMember(Name = "apn")]
+	[JsonPropertyName("apn")]
 	public string? Apn { get; set; }
 
 	/// <summary>
 	/// The E-UTRAN Cell Global Identifier.
 	/// </summary>
-	[DataMember(Name = "ecgi")]
+	[JsonPropertyName("ecgi")]
 	public Ecgi? Ecgi { get; set; }
 
 	/// <summary>
 	/// The International Mobile Equipment Identity.
 	/// </summary>
-	[DataMember(Name = "imei")]
+	[JsonPropertyName("imei")]
 	public string? Imei { get; set; }
 
 	/// <summary>
 	/// The Mobile Subscriber ISDN Number.
 	/// </summary>
-	[DataMember(Name = "msisdn")]
+	[JsonPropertyName("msisdn")]
 	public string? Msisdn { get; set; }
 
 	/// <summary>
 	/// The user addresses.
 	/// </summary>
-	[DataMember(Name = "user_addr")]
+	[JsonPropertyName("user_addr")]
 	public IList<string>? UserAddr { get; set; }
 
 	/// <summary>
 	/// The Radio Access Technology.
 	/// </summary>
-	[DataMember(Name = "rat")]
+	[JsonPropertyName("rat")]
 	public string? Rat { get; set; }
 
 	/// <summary>
 	/// The service.
 	/// </summary>
-	[DataMember(Name = "srv")]
+	[JsonPropertyName("srv")]
 	public string? Srv { get; set; }
 
 	/// <summary>
 	/// The username.
 	/// </summary>
-	[DataMember(Name = "username")]
+	[JsonPropertyName("username")]
 	public string? Username { get; set; }
 
 	/// <summary>
 	/// The MME hostname.
 	/// </summary>
-	[DataMember(Name = "mme_hostname")]
+	[JsonPropertyName("mme_hostname")]
 	public string? MmeHostname { get; set; }
 
 	/// <summary>
 	/// The MME realm name.
 	/// </summary>
-	[DataMember(Name = "mme_realmname")]
+	[JsonPropertyName("mme_realmname")]
 	public string? MmeRealMName { get; set; }
 
 	/// <summary>
 	/// The network interface.
 	/// </summary>
-	[DataMember(Name = "interface")]
+	[JsonPropertyName("interface")]
 	public string? Interface { get; set; }
 
 	/// <summary>
 	/// The raw Tracking Area Identity value.
 	/// </summary>
-	[DataMember(Name = "tai")]
+	[JsonPropertyName("tai")]
 	public object? TaiRaw { get; set; } = null!;
 
 	/// <summary>
@@ -158,9 +157,9 @@ public class EventDetails
 		{
 			null => null,
 			Tai tai => tai,
-			JObject jObject => jObject.ToObject<Tai>(),
+			JsonElement jsonElement => JsonSerializer.Deserialize<Tai>(jsonElement.GetRawText()),
 			string taiString => GetTaiFromString(taiString),
-			_ => throw new JsonReaderException($"Could not determine Tai format from '{TaiRaw}")
+			_ => throw new JsonException($"Could not determine Tai format from '{TaiRaw}")
 		};
 
 	/// <summary>
