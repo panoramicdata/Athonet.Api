@@ -19,96 +19,88 @@ internal sealed class AuthenticatedHttpHandler : HttpClientHandler
 		}
 	}
 
-	private static new bool DangerousAcceptAnyServerCertificateValidator(
-		HttpRequestMessage _,
-		X509Certificate2? __,
-		X509Chain? ___,
-		SslPolicyErrors ____)
-		=> true;
-
 	protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 	{
 		var guid = Guid.NewGuid();
 		try
 		{
-			if (_options.StoreLastRequestAndResponse)
-			{
-				LastHttpRequest = request.ToString();
-				if (request.Content != null)
-				{
-					LastHttpRequest += $"\n{await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)}";
-				}
-			}
-
-			_logger.LogTrace("{Guid}: Request starting", guid);
-
-			var requestCleaned = string.Join("\n", request
-				.ToString()
-				.Split('\n')
-				.Select(line => line.StartsWith("  X-MOGWAPI-AUTH", StringComparison.Ordinal)
-					? "  X-MOGWAPI-AUTH: XXXXXXXXXXXXXX"
-					: line
-				)
-			);
-
-			_logger.LogDebug("{Guid}: Request\n{RequestCleaned}", guid, requestCleaned);
+			await LogRequestAsync(guid, request, cancellationToken).ConfigureAwait(false);
 
 			var response = await base
 				.SendAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 
-			var content = await response
-				.Content
-				.ReadAsStringAsync(cancellationToken)
-				.ConfigureAwait(false);
-			_logger.LogDebug("{Guid}: Response ({ResponseStatusCode})\n{Content}",
-				guid,
-				response.StatusCode,
-				content
-				);
+			var content = await LogResponseAsync(guid, response, cancellationToken).ConfigureAwait(false);
 
-			if (_options.StoreLastRequestAndResponse)
-			{
-				LastHttpResponse = response.ToString();
-				if (response.Content != null)
-				{
-					LastHttpResponse += $"\n{await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)}";
-				}
-			}
-
-			if (response.IsSuccessStatusCode)
-			{
-				return response;
-			}
-			// Failure
-
-			_logger.LogDebug("{Guid}: Failure code ({ResponseStatusCode})",
-				guid,
-				response.StatusCode);
-
-			var responseBody = response
-				.Content is null
-					? null
-					: await response
-						.Content
-						.ReadAsStringAsync(cancellationToken)
-						.ConfigureAwait(false);
-
-			throw new AthonetApiException(response.StatusCode, responseBody ?? string.Empty);
+			return response.IsSuccessStatusCode
+				? response
+				: throw new AthonetApiException(response.StatusCode, content);
 		}
-		catch (AthonetApiException)
+		// AthonetApiException is the handler's own signal for an unsuccessful response; it is
+		// already logged by LogResponseAsync, so it is excluded here to avoid logging it twice.
+		catch (Exception exception) when (exception is not AthonetApiException)
 		{
-			throw;
-		}
-		catch (Exception exception)
-		{
-			_logger.LogError(exception, "{Message}",
-			exception.Message);
+			_logger.LogError(exception, "{Message}", exception.Message);
 			throw;
 		}
 		finally
 		{
 			_logger.LogTrace("{Guid}: Request complete", guid);
 		}
+	}
+
+	private async Task LogRequestAsync(Guid guid, HttpRequestMessage request, CancellationToken cancellationToken)
+	{
+		if (_options.StoreLastRequestAndResponse)
+		{
+			LastHttpRequest = request.ToString();
+			if (request.Content is not null)
+			{
+				LastHttpRequest += $"\n{await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)}";
+			}
+		}
+
+		_logger.LogTrace("{Guid}: Request starting", guid);
+		_logger.LogDebug("{Guid}: Request\n{RequestCleaned}", guid, RedactAuthHeader(request.ToString()));
+	}
+
+	private static string RedactAuthHeader(string request)
+		=> string.Join("\n", request
+			.Split('\n')
+			.Select(line => line.StartsWith("  X-MOGWAPI-AUTH", StringComparison.Ordinal)
+				? "  X-MOGWAPI-AUTH: XXXXXXXXXXXXXX"
+				: line
+			)
+		);
+
+	/// <summary>
+	/// Logs the response and, when configured, stores it. Returns the response body.
+	/// </summary>
+	private async Task<string> LogResponseAsync(Guid guid, HttpResponseMessage response, CancellationToken cancellationToken)
+	{
+		var content = await response
+			.Content
+			.ReadAsStringAsync(cancellationToken)
+			.ConfigureAwait(false);
+
+		_logger.LogDebug("{Guid}: Response ({ResponseStatusCode})\n{Content}",
+			guid,
+			response.StatusCode,
+			content
+			);
+
+		if (_options.StoreLastRequestAndResponse)
+		{
+			LastHttpResponse = $"{response}\n{content}";
+		}
+
+		if (!response.IsSuccessStatusCode)
+		{
+			_logger.LogDebug("{Guid}: Failure code ({ResponseStatusCode})",
+				guid,
+				response.StatusCode);
+		}
+
+		return content;
 	}
 }

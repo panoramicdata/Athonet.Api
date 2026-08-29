@@ -20,6 +20,9 @@ public interface IMogw
 	/// <param name="idGte">Return events with ID greater than or equal to this value.</param>
 	/// <param name="orderBy">The field to order results by.</param>
 	/// <param name="cancellationToken">The CancellationToken</param>
+	[SuppressMessage("Major Code Smell", "S2360:Optional parameters should not be used",
+		Justification = "Each parameter is an independently optional HTTP query string parameter "
+			+ "bound by Refit. Eleven independent options cannot be expressed as overloads.")]
 	[Get("/API/mogw/events")]
 	Task<MogwEventSet> GetEventsAsync(
 		[AliasAs("imsi")] string? imsi = null,

@@ -7,26 +7,33 @@ public class AthonetClient : IDisposable
 {
 	private bool disposedValue;
 	private readonly HttpClient _httpClient;
-	private readonly ILogger? _logger;
 	private readonly AuthenticatedHttpHandler _authenticatedHttpHandler;
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="AthonetClient"/> class without logging.
+	/// </summary>
+	/// <param name="options">The client connection options.</param>
+	public AthonetClient(AthonetClientOptions options) : this(options, null)
+	{
+	}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="AthonetClient"/> class.
 	/// </summary>
 	/// <param name="options">The client connection options.</param>
-	/// <param name="logger">An optional logger instance.</param>
-	public AthonetClient(AthonetClientOptions options, ILogger? logger = null)
+	/// <param name="logger">A logger instance, or null for no logging.</param>
+	public AthonetClient(AthonetClientOptions options, ILogger? logger)
 	{
 		// Validation
 		ArgumentNullException.ThrowIfNull(options);
 
 		options.Validate();
 
-		_logger = logger ?? new NullLogger<AthonetClient>();
+		var effectiveLogger = logger ?? new NullLogger<AthonetClient>();
 
 		_authenticatedHttpHandler = new AuthenticatedHttpHandler(
 			options,
-			_logger);
+			effectiveLogger);
 		_ = _authenticatedHttpHandler.ClientCertificates.Add(options.Certificate!);
 		_authenticatedHttpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
@@ -38,7 +45,7 @@ public class AthonetClient : IDisposable
 		_httpClient.DefaultRequestHeaders.Add("X-MOGWAPI-AUTH", $"{options.Username}:{options.Password}");
 		_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
 		_httpClient.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
-		_logger.LogTrace("{Message}", "Constructor complete");
+		effectiveLogger.LogTrace("{Message}", "Constructor complete");
 
 		var jsonSerializerOptions = new JsonSerializerOptions
 		{

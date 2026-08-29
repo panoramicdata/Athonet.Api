@@ -21,6 +21,9 @@
     </PackageReference>
   <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" PrivateAssets="all" /></ItemGroup>
   <ItemGroup>
+    <None Update="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Athonet.Api\Athonet.Api.csproj" />
   </ItemGroup>
 </Project>

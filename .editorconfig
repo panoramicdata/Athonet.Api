@@ -271,3 +271,8 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true:warning
 dotnet_style_prefer_compound_assignment = true:warning
 dotnet_style_prefer_simplified_interpolation = true:suggestion
 dotnet_style_namespace_match_folder = true:suggestion
+# Refit interfaces bind each optional HTTP query string parameter to an optional method
+# parameter. Overloads cannot express independently optional parameters, so S2360 does not
+# apply to the generated API surface.
+[Athonet.Api/Interfaces/*.cs]
+dotnet_diagnostic.S2360.severity = none
