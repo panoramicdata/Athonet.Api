@@ -1,4 +1,4 @@
-namespace Athonet.Api.Test;
+﻿namespace Athonet.Api.Test;
 
 public class MogwTests(ITestOutputHelper testOutputHelper, Fixture fixture) : BaseTest(testOutputHelper, fixture)
 {
@@ -8,7 +8,9 @@ public class MogwTests(ITestOutputHelper testOutputHelper, Fixture fixture) : Ba
 		// Get all
 		var events = await Client
 			.Mogw
-			.GetEventsAsync(orderBy: "id", limit: 10, cancellationToken: CancellationToken);
+			.GetEventsAsync(
+				new MogwEventQuery { OrderBy = "id", Limit = 10 },
+				CancellationToken);
 
 		_ = events.Should().BeOfType<MogwEventSet>();
 		_ = events.Should().NotBeNull();

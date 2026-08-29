@@ -1,4 +1,4 @@
-# Athonet.Api
+﻿# Athonet.Api
 
 A .NET client library for the Athonet API, providing access to HSS and MOGW endpoints.
 
@@ -58,7 +58,9 @@ using var client = new AthonetClient(options);
 var hssData = await client.Hss.GetSubscribersAsync();
 
 // Access MOGW API
-var events = await client.Mogw.GetEventsAsync(...);
+var events = await client.Mogw.GetEventsAsync(
+    new MogwEventQuery { OrderBy = "id", Limit = 10 },
+    cancellationToken);
 ```
 
 ### Configuration Options

@@ -31,13 +31,6 @@
 	"Naming",
 	"CA1716:Identifiers should not match keywords",
 	Justification = "No likelihood of confusion",
-	Scope = "member",
-	Target = "~M:Athonet.Api.Interfaces.IMogw.GetEventsAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Athonet.Api.Data.Mogw.EventType},System.Nullable{Athonet.Api.Data.Mogw.EventLayer},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)~System.Threading.Tasks.Task{Athonet.Api.Data.Mogw.MogwEventSet}")
-]
-[assembly: SuppressMessage(
-	"Naming",
-	"CA1716:Identifiers should not match keywords",
-	Justification = "No likelihood of confusion",
 	Scope = "type",
 	Target = "~T:Athonet.Api.Data.Mogw.Event")
 ]
