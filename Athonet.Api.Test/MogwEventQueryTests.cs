@@ -20,6 +20,10 @@ public class MogwEventQueryTests
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
+			// A handler is required to observe cancellation; doing so here also keeps the
+			// stub faithful to the contract the real pipeline relies on.
+			cancellationToken.ThrowIfCancellationRequested();
+
 			CapturedUri = request.RequestUri;
 			return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
 			{
