@@ -4,6 +4,9 @@ using Xunit.Microsoft.DependencyInjection.Abstracts;
 
 namespace Athonet.Api.Test;
 
+// Every test deriving from this class calls the live Athonet API with credentials from
+// appsettings.json, which CI does not have. CI excludes them with --filter "Category!=Integration".
+[Trait("Category", "Integration")]
 public class BaseTest : TestBed<Fixture>
 {
 	public BaseTest(ITestOutputHelper testOutputHelper, Fixture fixture) : base(testOutputHelper, fixture)
