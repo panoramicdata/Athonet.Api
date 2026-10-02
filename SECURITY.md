@@ -2,9 +2,11 @@
 
 ## Supported Versions
 
-If a vulnerability is found in our software, we will issue an update to the latest available public release at the time the vulnerability is identified. Versions of this project that are currently supported with security updates are **Version 1.0**. Any version earlier than this is unsupported.
+If a vulnerability is found in our software, we will issue an update. That update targets the latest available public release at the time the vulnerability is identified.
 
-We recommend you always use the latest version of any software to benefit from up to date bug fixes and security patches.
+Versions of this project that are currently supported with security updates are **Version 1.0**. Any version earlier than this is unsupported.
+
+We recommend using the latest version of any software to benefit from up to date bug fixes and security patches. If you must pin to an older version for compatibility reasons, apply security patches to that version promptly when they become available.
 
 ## Reporting a Vulnerability
 
