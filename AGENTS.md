@@ -1,6 +1,5 @@
-# Agent instructions
+# Athonet.Api — Agent Instructions
 
-> Last updated: 2026-10-02
 
 Read `.github/copilot-instructions.md` for repository-specific conventions.
 

@@ -2,6 +2,8 @@
 
 > Last updated: 2026-10-02
 
+.NET (NET = C# and the associated runtime framework)
+
 ## Identity
 
 You are a coding agent working on Athonet.Api, a .NET client library for the Athonet API. Favor this repository's conventions over generic defaults, and keep changes consistent with the existing codebase style.
