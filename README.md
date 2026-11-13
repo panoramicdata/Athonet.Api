@@ -2,6 +2,8 @@
 
 A .NET client library for the Athonet API, providing access to HSS and MOGW endpoints.
 
+Supports .NET 11.0.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Nuget](https://img.shields.io/nuget/v/Athonet.Api)](https://www.nuget.org/packages/Athonet.Api/)
 [![Nuget](https://img.shields.io/nuget/dt/Athonet.Api)](https://www.nuget.org/packages/Athonet.Api/)
@@ -114,7 +116,7 @@ catch (AthonetApiException ex)
 
 ## Requirements
 
-- .NET 10 or later
+- .NET 11.0 or later
 - Valid Athonet API credentials
 - X.509 client certificate
 
