@@ -1,4 +1,6 @@
-﻿# Athonet.Api
+# Athonet.Api
+
+> **Need help with APIs or .NET?** Panoramic Data are experts in APIs and .NET, and we can help with your development. [Contact us](https://www.panoramicdata.com/contact-us) or see our [software services](https://www.panoramicdata.com/services/software).
 
 A .NET client library for the Athonet API, providing access to HSS and MOGW endpoints.
 
