@@ -99,6 +99,9 @@ public class AuthenticatedHttpHandlerTests
 	private sealed class ThrowingHandler(Exception error) : HttpMessageHandler
 	{
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-			=> throw error;
+		{
+			ArgumentNullException.ThrowIfNull(request);
+			throw error;
+		}
 	}
 }

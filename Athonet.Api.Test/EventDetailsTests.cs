@@ -71,7 +71,7 @@ public class EventDetailsTests
 			Layer = EventLayer.GTP,
 			Proc = "proc1",
 			Type = EventType.Attach,
-			Ip = "10.0.0.1",
+			Ip = "192.0.2.1",
 			UnixTimestamp = 1700000000,
 			ENodeBName = "enodeb1",
 			Cause = "cause1",
@@ -94,7 +94,7 @@ public class EventDetailsTests
 		_ = deserialized.Layer.Should().Be(EventLayer.GTP);
 		_ = deserialized.Proc.Should().Be("proc1");
 		_ = deserialized.Type.Should().Be(EventType.Attach);
-		_ = deserialized.Ip!.ToString().Should().Be("10.0.0.1");
+		_ = deserialized.Ip!.ToString().Should().Be("192.0.2.1");
 		_ = deserialized.UnixTimestamp.Should().Be(1700000000);
 		_ = deserialized.ENodeBName.Should().Be("enodeb1");
 		_ = deserialized.Cause.Should().Be("cause1");
@@ -118,7 +118,7 @@ public class EventDetailsTests
 		{
 			GlobalENodeBId = new GlobalENodeBId { Plmn = "311340", HomeENodeBId = 7 },
 			Ecgi = new Ecgi { Plmn = "311340", Cellid = 9 },
-			PgwIp = new List<string> { "10.0.0.1", "10.0.0.2" },
+			PgwIp = new List<string> { "192.0.2.1", "192.0.2.2" },
 			UserAddr = new List<string> { "192.168.0.1" },
 			UnixTimestampMs = 1_700_000_000_123
 		};
@@ -132,7 +132,7 @@ public class EventDetailsTests
 		_ = deserialized.Ecgi.Should().NotBeNull();
 		_ = deserialized.Ecgi!.Plmn.Should().Be("311340");
 		_ = deserialized.Ecgi.Cellid.Should().Be(9);
-		_ = deserialized.PgwIp.Should().BeEquivalentTo(new[] { "10.0.0.1", "10.0.0.2" });
+		_ = deserialized.PgwIp.Should().BeEquivalentTo(new[] { "192.0.2.1", "192.0.2.2" });
 		_ = deserialized.UserAddr.Should().BeEquivalentTo(new[] { "192.168.0.1" });
 		_ = deserialized.UnixTimestampMs.Should().Be(1_700_000_000_123);
 	}
