@@ -91,6 +91,7 @@ public class AuthenticatedHttpHandlerTests
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
+			cancellationToken.ThrowIfCancellationRequested();
 			SentRequests.Add(request);
 			return Task.FromResult(new HttpResponseMessage(status) { Content = new StringContent(body, Encoding.UTF8, "application/json") });
 		}
@@ -100,6 +101,7 @@ public class AuthenticatedHttpHandlerTests
 	{
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
+			cancellationToken.ThrowIfCancellationRequested();
 			ArgumentNullException.ThrowIfNull(request);
 			throw error;
 		}

@@ -119,7 +119,7 @@ public class EventDetailsTests
 			GlobalENodeBId = new GlobalENodeBId { Plmn = "311340", HomeENodeBId = 7 },
 			Ecgi = new Ecgi { Plmn = "311340", Cellid = 9 },
 			PgwIp = new List<string> { "192.0.2.1", "192.0.2.2" },
-			UserAddr = new List<string> { "192.168.0.1" },
+			UserAddr = new List<string> { "198.51.100.7" },
 			UnixTimestampMs = 1_700_000_000_123
 		};
 
@@ -133,7 +133,7 @@ public class EventDetailsTests
 		_ = deserialized.Ecgi!.Plmn.Should().Be("311340");
 		_ = deserialized.Ecgi.Cellid.Should().Be(9);
 		_ = deserialized.PgwIp.Should().BeEquivalentTo(new[] { "192.0.2.1", "192.0.2.2" });
-		_ = deserialized.UserAddr.Should().BeEquivalentTo(new[] { "192.168.0.1" });
+		_ = deserialized.UserAddr.Should().BeEquivalentTo(new[] { "198.51.100.7" });
 		_ = deserialized.UnixTimestampMs.Should().Be(1_700_000_000_123);
 	}
 }
