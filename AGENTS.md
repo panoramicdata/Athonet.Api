@@ -1,4 +1,6 @@
-# Athonet.Api — Agent Instructions
+# Athonet.Api: Agent Instructions
+
+Version: 1.0
 
 
 Read `.github/copilot-instructions.md` for repository-specific conventions.

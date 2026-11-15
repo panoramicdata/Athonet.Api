@@ -7,10 +7,10 @@ public class NamedIdentifiedItemTests
 	[Fact]
 	public void Serialisation_RoundTripsBothProperties()
 	{
-		var profile = new UsimProfile { Id = 7, Name = "p1" };
+		var item = new ClosedSubscriberGroup { Id = 7, Name = "p1" };
 
-		var json = JsonSerializer.Serialize(profile);
-		var deserialized = JsonSerializer.Deserialize<UsimProfile>(json)!;
+		var json = JsonSerializer.Serialize(item);
+		var deserialized = JsonSerializer.Deserialize<ClosedSubscriberGroup>(json)!;
 
 		_ = deserialized.Id.Should().Be(7);
 		_ = deserialized.Name.Should().Be("p1");
