@@ -18,7 +18,7 @@ public class CustomUrlParameterFormatter : IUrlParameterFormatter
 	/// <param name="attributeProvider">The attribute provider for the parameter.</param>
 	/// <param name="type">The parameter type.</param>
 	/// <returns>The formatted string value.</returns>
-	public virtual string? Format(object? value, ICustomAttributeProvider attributeProvider, Type type)
+	public virtual string? Format(object? value, IParameterAttributeProvider attributeProvider, Type type)
 	{
 		if (value is null)
 		{
