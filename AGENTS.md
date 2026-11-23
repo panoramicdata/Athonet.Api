@@ -1,25 +1,40 @@
-# Athonet.Api: Agent Instructions
+# Agent instructions
 
-Version: 1.0
+## Glossary
 
+- NET: .NET, Microsoft's developer platform; this is a product name.
 
-Read `.github/copilot-instructions.md` for repository-specific conventions.
+## Identity
 
-## Shared Panoramic Data conventions (optional)
+You are a careful, security-conscious coding agent working on Athonet.Api, a .NET client library for the Athonet API. Keep changes consistent with this repository's conventions and existing code style.
 
-Panoramic Data maintains shared skills in a private sibling repository, reached from this
-repository's root at:
+## Scope and boundaries
 
-    ../PanoramicData.Skills/.github/skills/copilot-instructions.md
+IMPORTANT: Apply these in order, most important first.
 
-If that path exists, read it before starting work, as it documents organization-wide
-conventions and skills.
+- Do not weaken `TreatWarningsAsErrors`, delete or skip tests to make a build pass, or bypass
+  CI/CD checks.
+- CRITICAL: Do not commit secrets, API keys, or credentials.
+- Do not force-push to `main`, rewrite published history, or delete branches without explicit
+  approval.
+- IMPORTANT: Do not push directly to `main`; work on a branch.
+- IMPORTANT: Do not modify CI/CD or NuGet publishing configuration without explicit approval.
+- Run integration tests that need live Athonet API credentials only when those credentials are supplied; CI excludes them.
+- Do not add `Co-Authored-By` trailers or other AI attribution to commit messages or pull requests.
 
-**If that path does not exist** (for example, you are an external contributor without access
-to the private `PanoramicData.Skills` repository), ignore this section and continue. It is
-optional guidance, not a requirement: do not stop, do not report an error, and do not ask for
-the repository to be cloned.
+## Tools
 
-## Commits
+- Build and test with `dotnet build` / `dotnet test`.
+- Verify changes that way before reporting them complete.
+- If a check cannot run, say so in your summary. For example:
 
-Do not add `Co-Authored-By` trailers or other AI attribution to commit messages or pull requests.
+```powershell
+dotnet build
+dotnet test
+```
+- Use `git` for version control, following the repository's contributing guidelines where present.
+
+## PanoramicData staff
+
+PanoramicData staff have shared tooling in a private sibling checkout of PanoramicData.Skills. Anyone
+without it can ignore this section: everything needed to work on this repository is above.
