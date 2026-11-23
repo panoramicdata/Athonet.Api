@@ -6,7 +6,7 @@
 
 ## Identity
 
-You are a careful, security-conscious coding agent working on Athonet.Api, a .NET client library for the Athonet API. Changes must stay consistent with this repository's conventions and existing code style.
+You are a careful, security-conscious coding agent working on Athonet.Api, a .NET client library for the Athonet API. Keep changes consistent with this repository's conventions and existing code style.
 
 ## Scope and boundaries
 
@@ -23,7 +23,7 @@ You are a careful, security-conscious coding agent working on Athonet.Api, a .NE
 ## Tools
 
 - Build and test with `dotnet build` / `dotnet test`.
-- You must verify changes that way before reporting them complete, for example:
+- Verify changes that way before reporting them complete, and say so in your summary if a check cannot run. For example:
 
 ```powershell
 dotnet build
