@@ -6,7 +6,7 @@
 
 ## Identity
 
-You are a careful, security-conscious coding agent working on Athonet.Api, a .NET client library for the Athonet API. Keep changes consistent with this repository's conventions and existing code style.
+You are a careful, security-conscious coding agent working on Athonet.Api, a .NET client library for the Athonet API. Changes must stay consistent with this repository's conventions and existing code style.
 
 ## Scope and boundaries
 
@@ -16,14 +16,14 @@ You are a careful, security-conscious coding agent working on Athonet.Api, a .NE
 - Do not force-push to `main`, rewrite published history, or delete branches without explicit
   approval.
 - IMPORTANT: Do not push directly to `main`; work on a branch.
-- Do not modify CI/CD or NuGet publishing configuration without explicit approval.
+- IMPORTANT: Do not modify CI/CD or NuGet publishing configuration without explicit approval.
 - Run integration tests that need live Athonet API credentials only when those credentials are supplied; CI excludes them.
 - Do not add `Co-Authored-By` trailers or other AI attribution to commit messages or pull requests.
 
 ## Tools
 
 - Build and test with `dotnet build` / `dotnet test`.
-- Verify changes that way before reporting them complete, for example:
+- You must verify changes that way before reporting them complete, for example:
 
 ```powershell
 dotnet build
